@@ -1,6 +1,8 @@
-<script>
+<script lang="ts">
     import HelloWorld from "../lib/components/HelloWorld.svelte";
-</script>>
+    import AbilityContainer from "$lib/components/AbilityContainer.svelte";
+</script>
 
 <h1>Welcome to SvelteKit</h1>
 <HelloWorld />
+<AbilityContainer />
