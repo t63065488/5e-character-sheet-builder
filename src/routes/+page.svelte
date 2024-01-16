@@ -4,8 +4,6 @@
     import PointBuy from "$lib/components/ability-score/PointBuy.svelte"
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<HelloWorld />
 <RandomScore />
 <br/>
 <PointBuy />
