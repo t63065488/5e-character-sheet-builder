@@ -4,7 +4,10 @@
     export let ability: AbilityBlock;
 </script>
 
-<p>{ability.getAbilityType()}: {ability.getAbilityScore()} (Modifier: {ability.getAbilityModifier()})</p>
+<div>
+    <p>{ability.getAbilityType()}: {ability.getAbilityScore()} (Modifier: {ability.getAbilityModifier()})</p>
+</div>
+
 
 
 

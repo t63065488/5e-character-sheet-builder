@@ -12,7 +12,7 @@
     }
 
     const buyPoint = (block: AbilityBlock): AbilityBlock => {
-        if(block.getAbilityScore() != 15 && availablePoints > getCost(block.getAbilityScore() + 1)) {
+        if(block.getAbilityScore() != 15 && availablePoints >= getCost(block.getAbilityScore() + 1)) {
             availablePoints -= getCost(block.getAbilityScore() + 1);
             block.setAbilityScore(block.getAbilityScore() + 1);
         }
@@ -33,12 +33,14 @@
 </div>
 <div>
     {#each abilityBlocks as block}
-    <button on:click={() => block = sellPoint(block)}>
-        -
-    </button>
-    <AbilityContainer abilityBlocks={[block]}/>
-    <button on:click={() => block = buyPoint(block)}>
-        +
-    </button>
+    <div  class="btn-group variant-filled">
+        <button type="button" class="btn btn-sm variant-filled" on:click={() => block = sellPoint(block)}>
+            -
+        </button>
+        <AbilityContainer abilityBlocks={[block]}/>
+        <button type="button" class="btn btn-sm variant-filled" on:click={() => block = buyPoint(block)}>
+            +
+        </button>
+    </div>
     {/each}
 </div>
