@@ -6,7 +6,7 @@
 
 </script>
 
-<ul>
+<ul id="score-list">
     {#each abilityBlocks as block}
         <AbilityScore ability={block}/>
     {/each}

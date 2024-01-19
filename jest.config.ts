@@ -11,7 +11,7 @@ const config: Config = {
         preprocess: true,
       },
     ],
-    "^.+\\.ts$": [
+    "^.+\\.[tj]sx?$": [
       "ts-jest",
       {
         useESM: true,
@@ -27,6 +27,7 @@ const config: Config = {
       prefix: "<rootDir>/5e-character-sheet-builder",
     }),
   },
+  testEnvironment: "jsdom"
 };
 
 export default config;
