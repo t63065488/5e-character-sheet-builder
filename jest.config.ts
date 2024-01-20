@@ -27,7 +27,13 @@ const config: Config = {
       prefix: "<rootDir>/5e-character-sheet-builder",
     }),
   },
-  testEnvironment: "jsdom"
+  testEnvironment: "jsdom",
+  collectCoverage: true,
+  coverageThreshold: {
+    global: {
+      lines: 90
+    }
+  }
 };
 
 export default config;
