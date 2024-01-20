@@ -1,13 +1,17 @@
 <script lang="ts">
-    import { AbilityBlock } from "$lib/types/ability";
+  import { AbilityBlock } from "$lib/types/ability";
 
-    export let ability: AbilityBlock;
+  export let ability: AbilityBlock;
 </script>
 
-<div>
-    <p>{ability.getAbilityType()}: {ability.getAbilityScore()} (Modifier: {ability.getAbilityModifier()})</p>
+<div id="{ability.getAbilityType()}-score-block">
+  <p id="{ability.getAbilityType()}-score-text-type">
+    {ability.getAbilityType()}:
+  </p>
+  <p id="{ability.getAbilityType()}-score-text-score">
+    {ability.getAbilityScore()}
+  </p>
+  <p id="{ability.getAbilityType()}-score-text-modifier">
+    (Modifier: {ability.getAbilityModifier()})
+  </p>
 </div>
-
-
-
-
