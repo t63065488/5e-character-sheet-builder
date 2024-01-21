@@ -31,9 +31,9 @@ const config: Config = {
   collectCoverage: true,
   coverageThreshold: {
     global: {
-      lines: 90
-    }
-  }
+      lines: 90,
+    },
+  },
 };
 
 export default config;
