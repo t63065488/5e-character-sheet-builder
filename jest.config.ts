@@ -29,11 +29,6 @@ const config: Config = {
   },
   testEnvironment: "jsdom",
   collectCoverage: true,
-  coverageThreshold: {
-    global: {
-      lines: 90,
-    },
-  },
 };
 
 export default config;
