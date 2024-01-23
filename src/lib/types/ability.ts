@@ -14,7 +14,7 @@ export class AbilityBlock {
 
   constructor(
     private type: AbilityType,
-    public abilityScore: number,
+    private abilityScore: number,
   ) {
     this.abilityModifier = calculateModifier(this.abilityScore);
   }

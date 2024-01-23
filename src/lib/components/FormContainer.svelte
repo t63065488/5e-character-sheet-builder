@@ -1,6 +1,13 @@
 <script lang="ts">
-    import RandomScore from "$lib/components/ability-score/RandomScores.svelte"
     import PointBuy from "$lib/components/ability-score/PointBuy.svelte"
+    import FormStepper from "./FormStepper.svelte";
+    import CharacterInfo from "./character-info/CharacterInfo.svelte";
 </script>
 
-<form></form>
+<div class="w-6/12">
+    <FormStepper/>
+</div>
+<div class="w-6/12">
+    <CharacterInfo/>
+    <PointBuy/>
+</div>
