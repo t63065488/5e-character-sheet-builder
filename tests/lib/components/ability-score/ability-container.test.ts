@@ -1,5 +1,6 @@
 import AbilityContainer from "$lib/components/ability-score/AbilityContainer.svelte";
-import { AbilityBlock, AbilityType } from "$lib/types/ability";
+import { AbilityBlock } from "$lib/types/ability";
+import AbilityType from "$lib/types/abilityType";
 import { render } from "@testing-library/svelte";
 
 test("should render", async () => {

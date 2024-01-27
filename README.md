@@ -18,11 +18,13 @@ npm run build
 ```
 
 You can preview the production build with:
+
 ```bash
 npm run preview
 ```
 
 ## Testing
+
 This project makes use of jest to perform unit tests. To run the tests:
 
 ```bash
@@ -30,7 +32,9 @@ npm run test
 ```
 
 ## Misc
+
 ### Prettier
+
 The project makes use of prettier to format files. To format the project, run:
 
 ```bash

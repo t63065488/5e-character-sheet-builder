@@ -1,15 +1,7 @@
 import { calculateModifier } from "$lib/utils/modifiers";
+import AbilityType from "./abilityType";
 
-export enum AbilityType {
-  STR = "Strength",
-  DEX = "Dexterity",
-  CON = "Constitution",
-  INT = "Intelligence",
-  WIS = "Wisdom",
-  CHA = "Charisma",
-}
-
-export class AbilityBlock {
+export default class AbilityBlock {
   private abilityModifier: number;
 
   constructor(

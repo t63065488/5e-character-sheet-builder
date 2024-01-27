@@ -1,4 +1,5 @@
-import { AbilityBlock, AbilityType } from "$lib/types/ability";
+import AbilityBlock from "$lib/types/ability";
+import AbilityType from "$lib/types/abilityType";
 
 function calculateModifier(abilityScore: number): number {
   return Math.floor((abilityScore - 10) / 2);

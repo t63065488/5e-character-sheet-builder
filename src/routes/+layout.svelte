@@ -1,4 +1,5 @@
 <script lang="ts">
-import "../app.pcss";</script>
+  import "../app.pcss";
+</script>
 
-<slot></slot>
+<slot />

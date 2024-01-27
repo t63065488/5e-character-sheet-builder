@@ -1,4 +1,5 @@
-import { AbilityBlock, AbilityType } from "$lib/types/ability";
+import { AbilityBlock } from "$lib/types/ability";
+import AbilityType from "$lib/types/abilityType";
 
 test("When setAbilityScore called, should update modifier value", () => {
   // Given

@@ -1,5 +1,6 @@
 import AbilityScore from "$lib/components/ability-score/AbilityScore.svelte";
-import { AbilityBlock, AbilityType } from "$lib/types/ability";
+import { AbilityBlock } from "$lib/types/ability";
+import AbilityType from "$lib/types/abilityType";
 import { getByTestId, render } from "@testing-library/svelte";
 
 test("should render type, score and modifier", async () => {
