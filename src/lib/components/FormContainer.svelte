@@ -9,7 +9,13 @@
   <Stepper>
     <Step>
       <svelte:fragment slot="header">Character Info</svelte:fragment>
-      <CharacterInfo races={getRaces()} />
+      {#await getRaces()}
+      <CharacterInfo races={[]} />
+      {:then races} 
+      <CharacterInfo races={races} />
+      {:catch someError}
+      <CharacterInfo races={[]} />
+      {/await}
     </Step>
     <Step>
       <svelte:fragment slot="header">Ability Scores</svelte:fragment>
