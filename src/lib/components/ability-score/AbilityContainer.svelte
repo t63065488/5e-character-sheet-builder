@@ -1,6 +1,6 @@
 <script lang="ts">
   import AbilityScore from "$lib/components/ability-score/AbilityScore.svelte";
-  import { AbilityBlock } from "$lib/types/ability";
+  import AbilityBlock from "$lib/types/ability";
 
   export let abilityBlocks: AbilityBlock[];
 </script>

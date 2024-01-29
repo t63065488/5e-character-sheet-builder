@@ -1,10 +1,8 @@
 import { Race } from "./race";
 
-export default class CharacterInfo {
-  public constructor(
-    private name: string,
-    private race: Race,
-    private age?: number,
-    private height?: number,
-  ) {}
+export default interface CharacterInfo {
+  name?: string,
+  race?: Race,
+  age?: number,
+  height?: number,
 }

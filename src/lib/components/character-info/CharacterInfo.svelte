@@ -2,7 +2,6 @@
   import { Race } from "$lib/types/race";
 
   export let races: Race[] = [];
-  console.log(races + "")
 </script>
 
 <div class="flex w-full">
