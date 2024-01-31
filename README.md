@@ -1,4 +1,5 @@
 # 5e Character Sheet Builder
+A svelte project designed to enable the creation of 5e character sheets. This project makes of the 5e API and aims to integrate with other datasets.
 
 ## Developing
 
