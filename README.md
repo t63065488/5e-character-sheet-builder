@@ -1,7 +1,7 @@
 # 5e Character Sheet Builder
 A svelte project designed to enable the creation of 5e character sheets. This project makes of the 5e API and aims to integrate with other datasets.
 
-## Developing
+### Developing
 
 ```bash
 npm run dev
@@ -10,7 +10,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+### Building
 
 To create a production version of your app:
 
@@ -24,7 +24,7 @@ You can preview the production build with:
 npm run preview
 ```
 
-## Testing
+### Testing
 
 This project makes use of jest to perform unit tests. To run the tests:
 
@@ -32,9 +32,9 @@ This project makes use of jest to perform unit tests. To run the tests:
 npm run test
 ```
 
-## Misc
+### Misc
 
-### Prettier
+#### Prettier
 
 The project makes use of prettier to format files. To format the project, run:
 
