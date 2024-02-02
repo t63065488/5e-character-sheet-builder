@@ -10,7 +10,7 @@ export default async function getRaces() {
   apiEndpoints.forEach(endpoint => {
     axios.get(apiBase + endpoint.url).then(race => {
       let raceData = race.data;
-      raceStore.update((data) => [...data, new Race(raceData.name, raceData.size, raceData.speed, raceData.traits, raceData.size_description)]);
+      raceStore.update((data) => [...data, { name: raceData.name, size: raceData.size, speed: raceData.speed, features: raceData.traits, heightRange: raceData.size_description }]);
     }, () => {
       console.error("Error retrieving race data.")
     })
