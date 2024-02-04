@@ -1,6 +1,7 @@
 <script lang="ts">
   import AbilityContainer from "$lib/components/ability-score/AbilityContainer.svelte";
   import { getDefaultAbilityBlocks } from "$lib/utils/modifiers";
+  import UpdateAbilityScoresButton from "./UpdateAbilityScoresButton.svelte";
 
   let abilityBlocks = getDefaultAbilityBlocks();
 
@@ -45,5 +46,8 @@
     </button>
   {/each}
 </ul>
+<div>
+  <UpdateAbilityScoresButton statBlocks={abilityBlocks} />
+</div>
 
 <AbilityContainer {abilityBlocks} />
