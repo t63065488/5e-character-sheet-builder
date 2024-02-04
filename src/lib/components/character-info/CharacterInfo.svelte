@@ -8,7 +8,11 @@
 <div class="flex w-full">
   <label class="label">
     <span>Character Name</span>
-    <input class="input" type="text" bind:value={$characterInfoStore.characterInfo.name}/>
+    <input
+      class="input"
+      type="text"
+      bind:value={$characterInfoStore.characterInfo.name}
+    />
   </label>
   <label class="label">
     <span>Race</span>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AbilityBlock } from "$lib/types/ability";
+  import AbilityBlock from "$lib/types/ability";
   import { getDefaultAbilityBlocks } from "$lib/utils/modifiers";
   import AbilityContainer from "$lib/components/ability-score/AbilityContainer.svelte";
 
