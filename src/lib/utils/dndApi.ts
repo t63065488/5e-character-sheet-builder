@@ -5,7 +5,7 @@ import { raceStore } from "$lib/stores";
 
 const apiBase = "https://www.dnd5eapi.co";
 
-export default async function getRaces() {
+export async function getRaces() {
   const apiEndpoints: [{ index: string; name: string; url: string }] = (
     await axios.get(apiBase + "/api/races")
   ).data.results;
@@ -29,4 +29,10 @@ export default async function getRaces() {
       },
     );
   });
+}
+
+export async function getSpells() {
+  const apiEndpoints: [{ index: string; name: string; url: string }] = (
+    await axios.get(apiBase + "/api/spells")
+  ).data.results;
 }
