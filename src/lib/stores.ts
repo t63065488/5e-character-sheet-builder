@@ -9,3 +9,6 @@ export const characterInfoStore: Writable<Character> = writable({
 });
 
 export const raceStore: Writable<Race[]> = writable([]);
+
+
+export const spellStore: Writable<any[]> = writable([]);
