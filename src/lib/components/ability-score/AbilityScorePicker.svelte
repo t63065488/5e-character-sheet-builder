@@ -2,8 +2,13 @@
   import { TabGroup, Tab } from "@skeletonlabs/skeleton";
   import PointBuy from "./PointBuy.svelte";
   import RandomScores from "./RandomScores.svelte";
+  import { characterInfoStore } from "$lib/stores";
 
   let currentTab: number = 0;
+
+  characterInfoStore.subscribe((character) => {
+    // Logic to update ability score bonus
+  });
 </script>
 
 <div>

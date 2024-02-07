@@ -1,7 +1,8 @@
-import { Race } from "$lib/types/race";
+import { AbilityBonus, Race } from "$lib/types/race";
 import "axios";
 import axios from "axios";
 import { raceStore, spellStore } from "$lib/stores";
+import AbilityType from "$lib/types/abilityType";
 
 const apiBase = "https://www.dnd5eapi.co";
 
@@ -20,6 +21,7 @@ export async function getRaces() {
             size: raceData.size,
             speed: raceData.speed,
             features: raceData.traits,
+            abilityBonuses: mapAbilityBonuses(raceData.ability_bonuses),
             heightRange: raceData.size_description,
           },
         ]);
@@ -35,14 +37,33 @@ export async function getSpells() {
   const spellEndpoints: [{ index: string; name: string; url: string }] = (
     await axios.get(apiBase + "/api/spells")
   ).data.results;
-  console.log(spellEndpoints)
   spellEndpoints.forEach((endpoint) => {
-    axios.get(apiBase + endpoint.url).then((newSpell) => {
-      spellStore.update((currentSpells) => [
-        ...currentSpells,
-        newSpell.data
-      ])
-    })
-  })
+    axios.get(apiBase + endpoint.url).then(
+      (newSpell) => {
+        spellStore.update((currentSpells) => [...currentSpells, newSpell.data]);
+      },
+      () => {
+        console.error("Error retrieving spell data.");
+      },
+    );
+  });
 }
 
+function mapAbilityBonuses(
+  abilityBonuses: [
+    {
+      ability_score: { index: string; name: string; url: string };
+      bonus: number;
+    },
+  ],
+): AbilityBonus[] {
+  let bonuses: AbilityBonus[] = [];
+  abilityBonuses.forEach((bonus) => {
+    bonuses.push({
+      abilityType:
+        AbilityType[bonus.ability_score.name as keyof typeof AbilityType],
+      bonus: bonus.bonus,
+    });
+  });
+  return bonuses;
+}

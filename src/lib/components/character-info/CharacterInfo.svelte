@@ -18,7 +18,7 @@
     <span>Race</span>
     <select class="select" bind:value={$characterInfoStore.characterInfo.race}>
       {#each races as race}
-        <option>{race.name}</option>
+        <option value={race}>{race.name}</option>
       {/each}
     </select>
   </label>
