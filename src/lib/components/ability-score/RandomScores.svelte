@@ -1,7 +1,15 @@
 <script lang="ts">
-  import AbilityContainer from "$lib/components/ability-score/AbilityContainer.svelte";
+  import AbilityType from "$lib/types/abilityType";
   import { getDefaultAbilityBlocks } from "$lib/utils/modifiers";
-  import UpdateAbilityScoresButton from "./UpdateAbilityScoresButton.svelte";
+
+  let statOptions = [
+    AbilityType.STR,
+    AbilityType.DEX,
+    AbilityType.CON,
+    AbilityType.INT,
+    AbilityType.WIS,
+    AbilityType.CHA,
+  ];
 
   let abilityBlocks = getDefaultAbilityBlocks();
 
@@ -23,31 +31,35 @@
   function rollD6(): number {
     return Math.floor(Math.random() * 6 + 1); // Max 6, min 1
   }
+
+  function updateAbilityScore() {}
 </script>
 
-<button
-  on:click={() => {
-    abilityBlocks.map((block) => block.setAbilityScore(rollScore()));
-    abilityBlocks = abilityBlocks;
-  }}
->
-  Roll All
-</button>
-
-<ul>
-  {#each abilityBlocks as block}
+<div class="flex-col w-full">
+  <div class="flex justify-center">
+    {#each abilityBlocks as block}
+      <div class="flex flex-col items-center">
+        <h2>{block.getAbilityScore()}</h2>
+        <hr />
+        <select class="select" on:change={updateAbilityScore}>
+          <option value=""></option>
+          {#each statOptions as statOption}
+            <option value={statOption}>{statOption}</option>
+          {/each}
+        </select>
+      </div>
+    {/each}
+  </div>
+  <div class="flex justify-center">
     <button
+      type="button"
+      class="btn btn-md variant-filled"
       on:click={() => {
-        block.setAbilityScore(rollScore());
-        block = block;
+        abilityBlocks.map((block) => block.setAbilityScore(rollScore()));
+        abilityBlocks = abilityBlocks;
       }}
     >
       Roll!
     </button>
-  {/each}
-</ul>
-<div>
-  <UpdateAbilityScoresButton statBlocks={abilityBlocks} />
+  </div>
 </div>
-
-<AbilityContainer {abilityBlocks} />

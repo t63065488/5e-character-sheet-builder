@@ -1,9 +1,8 @@
 <script lang="ts">
-    import AbilityScoreBonuses from "./AbilityScoreBonuses.svelte";
-import AbilityScorePicker from "./AbilityScorePicker.svelte";
-import { characterInfoStore } from "$lib/stores";
-    import AbilityContainer from "./AbilityContainer.svelte";
-
+  import AbilityScoreBonuses from "./AbilityScoreBonuses.svelte";
+  import AbilityScorePicker from "./AbilityScorePicker.svelte";
+  import { characterInfoStore } from "$lib/stores";
+  import AbilityContainer from "./AbilityContainer.svelte";
 </script>
 
 <!-- 
@@ -13,10 +12,13 @@ import { characterInfoStore } from "$lib/stores";
     The picker determines the initial base stats. The racial bonuses are then applied and the final result is displayed in the blocks.
  -->
 
- <div>
-    <AbilityScorePicker />
-    <hr/>
-    <AbilityScoreBonuses abilityBonuses={$characterInfoStore.characterInfo.race?.abilityBonuses ?? []} />
-    <hr/>
-    <AbilityContainer abilityBlocks={$characterInfoStore.abilityBlocks}/>
- </div>
+<div>
+  <AbilityScorePicker />
+  <hr />
+  <AbilityScoreBonuses
+    abilityBonuses={$characterInfoStore.characterInfo.race?.abilityBonuses ??
+      []}
+  />
+  <hr />
+  <AbilityContainer abilityBlocks={$characterInfoStore.abilityBlocks} />
+</div>

@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { AbilityBonus } from "$lib/types/race";
+  import { AbilityBonus } from "$lib/types/race";
 
-    export let abilityBonuses: AbilityBonus[] = [];
+  export let abilityBonuses: AbilityBonus[] = [];
 </script>
 
 <!-- 
@@ -11,6 +11,5 @@
  -->
 
 {#each abilityBonuses as bonus}
- <p>{bonus.abilityType} + {bonus.bonus}</p>
+  <p>{bonus.abilityType} + {bonus.bonus}</p>
 {/each}
-
