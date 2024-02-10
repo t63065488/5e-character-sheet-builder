@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { characterInfoStore } from "$lib/stores";
   import AbilityType from "$lib/types/abilityType";
   import { getDefaultAbilityBlocks } from "$lib/utils/modifiers";
 
@@ -32,7 +33,21 @@
     return Math.floor(Math.random() * 6 + 1); // Max 6, min 1
   }
 
-  function updateAbilityScore() {}
+  const updateAbilityScore = (type: AbilityType, value: number) => {
+    characterInfoStore.update((character) => {
+      let abilityScores = character.abilityBlocks;
+      abilityScores.filter(score => score.getAbilityType() === type).forEach(score => {
+        score.setAbilityScore(value);
+      })
+      return {
+        ...character,
+        abilityBlocks: abilityScores
+      }
+  });
+
+  characterInfoStore.subscribe((char) => console.log(char))
+}
+
 </script>
 
 <div class="flex-col w-full">
@@ -41,7 +56,7 @@
       <div class="flex flex-col items-center">
         <h2>{block.getAbilityScore()}</h2>
         <hr />
-        <select class="select" on:change={updateAbilityScore}>
+        <select class="select" on:change={() => updateAbilityScore(block.getAbilityType(), block.getAbilityScore())}>
           <option value=""></option>
           {#each statOptions as statOption}
             <option value={statOption}>{statOption}</option>
