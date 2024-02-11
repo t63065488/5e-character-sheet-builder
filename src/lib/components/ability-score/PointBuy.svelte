@@ -1,32 +1,33 @@
 <script lang="ts">
-  import AbilityBlock from "$lib/types/ability";
-  import { getDefaultAbilityBlocks } from "$lib/utils/modifiers";
   import AbilityContainer from "$lib/components/ability-score/AbilityContainer.svelte";
-  import UpdateAbilityScoresButton from "./UpdateAbilityScoresButton.svelte";
+  import {
+    AbilityScore,
+    getDeafultAbilityScores,
+  } from "$lib/types/abilityScore";
 
   const totalPoints: number = 27;
   let availablePoints: number = 27;
-  let abilityBlocks: AbilityBlock[] = getDefaultAbilityBlocks(8);
+  let abilityBlocks: AbilityScore[] = getDeafultAbilityScores(8);
 
   const getCost = (newStat: number) => {
     return newStat > 13 ? 2 : 1;
   };
 
-  const buyPoint = (block: AbilityBlock): AbilityBlock => {
+  const buyPoint = (block: AbilityScore): AbilityScore => {
     if (
-      block.getAbilityScore() != 15 &&
-      availablePoints >= getCost(block.getAbilityScore() + 1)
+      block.baseScore != 15 &&
+      availablePoints >= getCost(block.baseScore + 1)
     ) {
-      availablePoints -= getCost(block.getAbilityScore() + 1);
-      block.setAbilityScore(block.getAbilityScore() + 1);
+      availablePoints -= getCost(block.baseScore + 1);
+      block.baseScore = block.baseScore + 1;
     }
     return block;
   };
 
-  const sellPoint = (block: AbilityBlock): AbilityBlock => {
-    if (block.getAbilityScore() > 8) {
-      availablePoints += getCost(block.getAbilityScore());
-      block.setAbilityScore(block.getAbilityScore() - 1);
+  const sellPoint = (block: AbilityScore): AbilityScore => {
+    if (block.baseScore > 8) {
+      availablePoints += getCost(block.baseScore);
+      block.baseScore = block.baseScore - 1;
     }
     return block;
   };
@@ -55,7 +56,4 @@
       </button>
     </div>
   {/each}
-</div>
-<div>
-  <UpdateAbilityScoresButton statBlocks={abilityBlocks} />
 </div>

@@ -7,9 +7,10 @@
 
 <!-- 
     @component
-    Parent container for ability scores. This component uses 3 child components- a picker (e.g. random, point buy), racial bonuses (either statically applied, or selected) and the stat blocks themselves.
+    Parent container for ability scores. This component uses 2 child components.
 
-    The picker determines the initial base stats. The racial bonuses are then applied and the final result is displayed in the blocks.
+    1. Racials are displayed/selected, which feed into the picker.
+    2. The picker allows the user to choose their stats, including any racial bonuses applied.
  -->
 
 <div>
@@ -20,5 +21,4 @@
       []}
   />
   <hr />
-  <AbilityContainer abilityBlocks={$characterInfoStore.abilityBlocks} />
 </div>

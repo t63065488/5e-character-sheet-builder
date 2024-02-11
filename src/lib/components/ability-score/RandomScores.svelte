@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { characterInfoStore } from "$lib/stores";
+  import { characterInfoStore } from "$lib/stores";
+  import { AbilityScore } from "$lib/types/abilityScore";
   import AbilityType from "$lib/types/abilityType";
-  import { getDefaultAbilityBlocks } from "$lib/utils/modifiers";
 
   let statOptions = [
     AbilityType.STR,
@@ -12,7 +12,7 @@
     AbilityType.CHA,
   ];
 
-  let abilityBlocks = getDefaultAbilityBlocks();
+  let abilityScores: AbilityScore[] = [];
 
   function rollScore(): number {
     let scores: number[] = [];
@@ -35,28 +35,33 @@
 
   const updateAbilityScore = (type: AbilityType, value: number) => {
     characterInfoStore.update((character) => {
-      let abilityScores = character.abilityBlocks;
-      abilityScores.filter(score => score.getAbilityType() === type).forEach(score => {
-        score.setAbilityScore(value);
-      })
+      let abilityScores = character.abilityScores;
+      abilityScores
+        .filter((score) => score.abilityType === type)
+        .forEach((score) => {
+          score.baseScore = value;
+        });
       return {
         ...character,
-        abilityBlocks: abilityScores
-      }
-  });
+        abilityScores: abilityScores,
+      };
+    });
 
-  characterInfoStore.subscribe((char) => console.log(char))
-}
-
+    characterInfoStore.subscribe((char) => console.log(char));
+  };
 </script>
 
 <div class="flex-col w-full">
   <div class="flex justify-center">
-    {#each abilityBlocks as block}
+    {#each abilityScores as block}
       <div class="flex flex-col items-center">
-        <h2>{block.getAbilityScore()}</h2>
+        <h2>{block.totalScore}</h2>
         <hr />
-        <select class="select" on:change={() => updateAbilityScore(block.getAbilityType(), block.getAbilityScore())}>
+        <select
+          class="select"
+          on:change={() =>
+            updateAbilityScore(block.abilityType, block.baseScore)}
+        >
           <option value=""></option>
           {#each statOptions as statOption}
             <option value={statOption}>{statOption}</option>
@@ -70,8 +75,8 @@
       type="button"
       class="btn btn-md variant-filled"
       on:click={() => {
-        abilityBlocks.map((block) => block.setAbilityScore(rollScore()));
-        abilityBlocks = abilityBlocks;
+        abilityScores.map((block) => (block.baseScore = rollScore()));
+        abilityScores = abilityScores;
       }}
     >
       Roll!
