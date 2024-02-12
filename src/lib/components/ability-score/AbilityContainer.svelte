@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AbilityScore } from "$lib/types/abilityScore";
+  import { AbilityScore } from "$lib/types/abilityScore";
 
   export let abilityBlocks: AbilityScore[];
 </script>

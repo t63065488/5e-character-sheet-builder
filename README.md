@@ -27,7 +27,7 @@ npm run preview
 
 ### Testing
 
-This project makes use of jest to perform unit tests. To run the tests:
+This project makes use of vitest to perform unit tests. To run the tests:
 
 ```bash
 npm run test
