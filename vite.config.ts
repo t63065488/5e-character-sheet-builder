@@ -8,6 +8,14 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     include: ["./tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    exclude: [...configDefaults.exclude, "./*.config.{js,ts,cjs}"],
+    coverage: {
+      thresholds: {
+        lines: 80,
+      },
+      exclude: [
+        ...(configDefaults.coverage.exclude ?? ""),
+        "*.config.{js,ts,cjs}",
+      ],
+    },
   },
 });
