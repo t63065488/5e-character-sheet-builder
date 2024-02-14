@@ -16,6 +16,7 @@ export default defineConfig({
         ...(configDefaults.coverage.exclude ?? ""),
         "*.config.{js,ts,cjs}",
       ],
+      all: false
     },
   },
 });
