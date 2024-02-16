@@ -1,21 +1,21 @@
 import { getRaces, getSpells } from "$lib/utils/dndApi";
 import { expect, test } from "vitest";
-import { get } from 'svelte/store'
+import { get } from "svelte/store";
 import { raceStore, spellStore } from "$lib/stores";
 import { Race } from "$lib/types/race";
 
-test('getRaces', async () => {
-    await getRaces();
+test("getRaces", async () => {
+  await getRaces();
 
-    let loadedRaces: Race[] = get(raceStore);
+  let loadedRaces: Race[] = get(raceStore);
 
-    expect(loadedRaces).not.toBeNull();
-})
+  expect(loadedRaces).not.toBeNull();
+});
 
-test('getSpells', async () => {
-    await getSpells();
+test("getSpells", async () => {
+  await getSpells();
 
-    let loadedSpells: Race[] = get(spellStore);
+  let loadedSpells: Race[] = get(spellStore);
 
-    expect(loadedSpells).not.toBeNull();
-})
+  expect(loadedSpells).not.toBeNull();
+});
