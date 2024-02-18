@@ -40,6 +40,7 @@
         .filter((score) => score.abilityType === type)
         .forEach((score) => {
           score.baseScore = value;
+          score.totalScore = score.baseScore + score.bonusScore;
         });
       return {
         ...character,

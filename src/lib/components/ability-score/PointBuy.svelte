@@ -36,9 +36,9 @@
 <div>
   <p>Remaining Points: {availablePoints}/{totalPoints}</p>
 </div>
-<div>
+<div class="grid grid-flow-row grid-flow-col gap-4">
   {#each abilityBlocks as block}
-    <div class="btn-group variant-filled">
+    <div class="flex">
       <button
         type="button"
         class="btn btn-sm variant-filled"
@@ -46,7 +46,7 @@
       >
         -
       </button>
-      <AbilityContainer abilityBlocks={[block]} />
+      <AbilityContainer abilityScore={block} />
       <button
         type="button"
         class="btn btn-sm variant-filled"

@@ -2,7 +2,6 @@
   import AbilityScoreBonuses from "./AbilityScoreBonuses.svelte";
   import AbilityScorePicker from "./AbilityScorePicker.svelte";
   import { characterInfoStore } from "$lib/stores";
-  import AbilityContainer from "./AbilityContainer.svelte";
 </script>
 
 <!-- 
