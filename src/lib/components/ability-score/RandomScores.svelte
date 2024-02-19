@@ -47,8 +47,6 @@
         abilityScores: abilityScores,
       };
     });
-
-    characterInfoStore.subscribe((char) => console.log(char));
   };
 </script>
 

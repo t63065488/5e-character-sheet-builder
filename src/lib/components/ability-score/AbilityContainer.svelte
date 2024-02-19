@@ -17,6 +17,3 @@
     <h4 class="h4">{calculateModifier(abilityScore.totalScore)}</h4>
   </div>
 </div>
-
-<style>
-</style>
