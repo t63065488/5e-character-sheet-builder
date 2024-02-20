@@ -1,7 +1,11 @@
 <script lang="ts">
   import { characterInfoStore } from "$lib/stores";
-  import { AbilityScore } from "$lib/types/abilityScore";
+  import {
+    AbilityScore,
+    getDeafultAbilityScores,
+  } from "$lib/types/abilityScore";
   import AbilityType from "$lib/types/abilityType";
+  import AbilityContainer from "./AbilityContainer.svelte";
 
   let statOptions = [
     AbilityType.STR,
@@ -12,73 +16,56 @@
     AbilityType.CHA,
   ];
 
-  let abilityScores: AbilityScore[] = [];
+  let abilityScores: AbilityScore[] = getDeafultAbilityScores(8);
 
-  function rollScore(): number {
+  let rolls: any[] = [];
+
+  abilityScores.forEach(() => {
+    rolls.push([0, 0, 0, 0]);
+  });
+
+  function rollScore(): any {
     let scores: number[] = [];
     for (let i = 0; i < 4; ++i) {
       scores.push(rollD6());
     }
-    let currentIndex = 0;
-    scores.forEach((value, index) => {
-      if (value < scores[currentIndex]) {
-        currentIndex = index;
-      }
-    });
-    scores.splice(currentIndex, 1);
-    return scores.reduce((sum, current) => sum + current, 0);
+    scores.sort();
+    return {
+      score: scores[1] + scores[2] + scores[3],
+      rolls: scores,
+    };
   }
 
   function rollD6(): number {
     return Math.floor(Math.random() * 6 + 1); // Max 6, min 1
   }
-
-  const updateAbilityScore = (type: AbilityType, value: number) => {
-    characterInfoStore.update((character) => {
-      let abilityScores = character.abilityScores;
-      abilityScores
-        .filter((score) => score.abilityType === type)
-        .forEach((score) => {
-          score.baseScore = value;
-          score.totalScore = score.baseScore + score.bonusScore;
-        });
-      return {
-        ...character,
-        abilityScores: abilityScores,
-      };
-    });
-  };
 </script>
 
 <div class="flex-col w-full">
-  <div class="flex justify-center">
-    {#each abilityScores as block}
+  <div class="flex justify-between">
+    {#each abilityScores as block, index}
       <div class="flex flex-col items-center">
-        <h2>{block.totalScore}</h2>
+        <AbilityContainer abilityScore={block} />
         <hr />
-        <select
-          class="select"
-          on:change={() =>
-            updateAbilityScore(block.abilityType, block.baseScore)}
-        >
-          <option value=""></option>
-          {#each statOptions as statOption}
-            <option value={statOption}>{statOption}</option>
+        <div class="flex">
+          {#each rolls[index] as roll}
+            <p>{roll}</p>
           {/each}
-        </select>
+        </div>
+        <button
+          type="button"
+          class="btn btn-md variant-filled"
+          on:click={() => {
+            const result = rollScore();
+            block.baseScore = result.score;
+            rolls[index] = result.rolls;
+            block.totalScore = block.baseScore + block.bonusScore;
+          }}
+        >
+          Roll!
+        </button>
       </div>
     {/each}
   </div>
-  <div class="flex justify-center">
-    <button
-      type="button"
-      class="btn btn-md variant-filled"
-      on:click={() => {
-        abilityScores.map((block) => (block.baseScore = rollScore()));
-        abilityScores = abilityScores;
-      }}
-    >
-      Roll!
-    </button>
-  </div>
+  <div class="flex justify-center"></div>
 </div>
