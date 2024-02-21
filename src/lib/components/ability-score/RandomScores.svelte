@@ -6,6 +6,7 @@
   } from "$lib/types/abilityScore";
   import AbilityType from "$lib/types/abilityType";
   import AbilityContainer from "./AbilityContainer.svelte";
+  import {ArrowLeftSolid, ArrowRightSolid} from 'flowbite-svelte-icons';
 
   let statOptions = [
     AbilityType.STR,
@@ -45,6 +46,9 @@
   <div class="flex justify-between">
     {#each abilityScores as block, index}
       <div class="flex flex-col items-center">
+        {#if index !== 0}
+        <button><ArrowLeftSolid/></button>
+        {/if}
         <AbilityContainer abilityScore={block} />
         <hr />
         <div class="flex">
@@ -64,6 +68,9 @@
         >
           Roll!
         </button>
+        {#if index !== abilityScores.length}
+        <button><ArrowRightSolid/></button>
+        {/if}
       </div>
     {/each}
   </div>
