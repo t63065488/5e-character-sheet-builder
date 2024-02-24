@@ -10,9 +10,9 @@ test("should render", async () => {
         abilityType: AbilityType.CHA,
         baseScore: 10,
         bonusScore: 2,
-        totalScore: 12
-      }
-    }
-  })
+        totalScore: 12,
+      },
+    },
+  });
   expect(node).not.toBeNull();
 });

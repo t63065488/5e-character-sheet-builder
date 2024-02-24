@@ -3,10 +3,10 @@ import { render, cleanup } from "@testing-library/svelte";
 import { afterEach, expect, test } from "vitest";
 
 afterEach(() => {
-    cleanup();
-})
+  cleanup();
+});
 
 test("Should render", async () => {
-    const node = render(PointBuy, {});
-    expect(node.component).not.toBe(null);
-})
+  const node = render(PointBuy, {});
+  expect(node.component).not.toBe(null);
+});

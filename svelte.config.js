@@ -7,7 +7,7 @@ const config = {
   // for more information about preprocessors
   preprocess: [preprocess({})],
   compilerOptions: {
-    accessors: process.env.TEST
+    accessors: process.env.TEST,
   },
   kit: {
     // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.

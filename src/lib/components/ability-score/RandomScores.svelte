@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { updateCharacterAbilityScores } from "$lib/characterStore";
+  import { updateCharacterAbilityScores } from "$lib/characterStore";
   import {
     AbilityScore,
     getDeafultAbilityScores,
@@ -51,19 +51,24 @@
   };
 
   const rollAllScores = () => {
-    for(let i = 0; i < abilityScores.length; i++) {
+    for (let i = 0; i < abilityScores.length; i++) {
       const result = rollScore();
       abilityScores[i].baseScore = result.score;
-      abilityScores[i].totalScore = abilityScores[i].baseScore + abilityScores[i].bonusScore;
+      abilityScores[i].totalScore =
+        abilityScores[i].baseScore + abilityScores[i].bonusScore;
       rolls[i] = result.rolls;
     }
 
     updateCharacterAbilityScores(abilityScores);
-  }
+  };
 </script>
 
 <div class="flex-col w-full">
-  <button type="button" class="btn btn-sm variant-filled" on:click={() => rollAllScores()}>Roll!</button>
+  <button
+    type="button"
+    class="btn btn-sm variant-filled"
+    on:click={() => rollAllScores()}>Roll!</button
+  >
   <div class="flex justify-between">
     {#each abilityScores as block, index}
       <div class="flex flex-col items-center">
