@@ -24,6 +24,6 @@ describe("Component testing", () => {
     await fireEvent.click(button);
 
     // Assert
-    // expect(mock).toHaveBeenCalled();
+    expect(mock).toHaveBeenCalled();
   });
 });
