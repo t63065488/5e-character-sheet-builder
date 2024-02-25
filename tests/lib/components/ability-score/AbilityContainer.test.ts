@@ -4,16 +4,15 @@ import { render } from "@testing-library/svelte";
 import { expect, test } from "vitest";
 
 test("should render", async () => {
-  render(AbilityContainer, {
-    abilityBlocks: [
-      {
+  const node = render(AbilityContainer, {
+    props: {
+      abilityScore: {
         abilityType: AbilityType.CHA,
-        baseScore: 0,
-        bonusScore: 0,
-        totalScore: 0,
+        baseScore: 10,
+        bonusScore: 2,
+        totalScore: 12,
       },
-    ],
+    },
   });
-  const node = document.querySelector("#score-list");
   expect(node).not.toBeNull();
 });

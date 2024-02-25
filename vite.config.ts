@@ -1,11 +1,13 @@
 /// <reference types="vitest" />
 import { defineConfig } from "vite";
 import { configDefaults } from "vitest/config";
-import { sveltekit } from "@sveltejs/kit/vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [sveltekit()],
+  plugins: [svelte()],
   test: {
+    globals: true,
     environment: "jsdom",
     include: ["./tests/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     coverage: {
@@ -18,5 +20,6 @@ export default defineConfig({
       ],
       all: false,
     },
+    alias: [{ find: "$lib", replacement: resolve(__dirname, "./src/lib") }],
   },
 });
