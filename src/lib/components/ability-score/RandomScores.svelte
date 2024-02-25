@@ -67,7 +67,7 @@
   <button
     type="button"
     class="btn btn-sm variant-filled"
-    on:click={() => rollAllScores()}>Roll!</button
+    on:click={rollAllScores}>Roll!</button
   >
   <div class="flex justify-between">
     {#each abilityScores as block, index}
