@@ -5,4 +5,5 @@ import CharacterInfo from "./characterInfo";
 export default interface Character {
   characterInfo: CharacterInfo;
   abilityScores: AbilityScore[];
+  features: any[];
 }

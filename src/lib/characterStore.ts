@@ -1,6 +1,7 @@
 import { Writable, writable } from "svelte/store";
 import Character from "./types/character";
 import { AbilityScore, getDeafultAbilityScores } from "./types/abilityScore";
+import { Race } from "./types/race";
 
 export const characterStore: Writable<Character> = writable({
   characterInfo: {},
@@ -15,3 +16,14 @@ export const updateCharacterAbilityScores = (scores: AbilityScore[]) => {
     };
   });
 };
+
+export const updateCharacterRace = (newRace: Race) => {
+  // Remove old racial bonuses, apply new ones
+  characterStore.update((store) => {
+    let currentCharacter: Character = store;
+
+    return {
+      ...store
+    }
+  })
+}

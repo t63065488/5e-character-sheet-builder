@@ -4,6 +4,8 @@
 
   export let races: Race[] = [];
 
+  let selectedRace: Race;
+
   const handleSelectRace = () => {
     characterInfoStore.update((character) => {
       character.characterInfo.race?.abilityBonuses?.forEach((element) => {
@@ -36,7 +38,7 @@
     <span>Race</span>
     <select
       class="select"
-      bind:value={$characterInfoStore.characterInfo.race}
+      bind:value={selectedRace}
       on:change={handleSelectRace}
     >
       {#each races as race}
