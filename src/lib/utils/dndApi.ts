@@ -13,7 +13,7 @@ export async function getRaces() {
   raceEndpoints.forEach((endpoint) => {
     axios.get(apiBase + endpoint.url).then(
       (race) => {
-        console.log(race.data)
+        console.log(race.data);
         let raceData = race.data;
         raceStore.update((data) => [
           ...data,

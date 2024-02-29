@@ -23,7 +23,7 @@ export const updateCharacterRace = (newRace: Race) => {
     let currentCharacter: Character = store;
 
     return {
-      ...store
-    }
-  })
-}
+      ...store,
+    };
+  });
+};
