@@ -1,3 +1,4 @@
+import { AbilityBonus } from "./abilityBonus";
 import { AbilityScore } from "./abilityScore";
 import CharacterInfo from "./characterInfo";
 
@@ -5,5 +6,6 @@ import CharacterInfo from "./characterInfo";
 export default interface Character {
   characterInfo: CharacterInfo;
   abilityScores: AbilityScore[];
+  abilityBonuses: AbilityBonus[];
   features: any[];
 }

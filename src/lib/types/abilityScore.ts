@@ -1,4 +1,4 @@
-import AbilityType from "./abilityType";
+import AbilityType from "../enums/abilityType";
 
 export interface AbilityScore {
   baseScore: number;
