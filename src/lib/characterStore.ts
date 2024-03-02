@@ -44,8 +44,9 @@ export const updateCharacterRace = (newRace: Race) => {
                   score.abilityType,
                 )),
             );
-        })
-        .pop();
+        });
+
+        
     }
 
     newRace.abilityBonuses?.forEach((bonus) => {
