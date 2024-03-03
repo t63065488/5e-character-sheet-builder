@@ -1,8 +1,9 @@
 name: npm-run-test
-run-name: ${{ github.actor }}-&{{ github.sha }}-npm-run-test
+run-name: ${{ github.actor }}-${{ github.sha }}-npm-run-test
 on: [push]
 jobs:
   npm-run-test:
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
