@@ -5,7 +5,7 @@ on:
     branches:
       - main
 jobs:
-  npm-run-test:
+  npm-run-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -14,7 +14,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-    - run: npm install
-    - run: git config --global user.email "t63065488@gmail.com" && git config --global user.name "t63065488"
-    - run: npm run deploy -- --message "Deploy commit ${{ github.sha }}"
+    - name: 
+      run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git && npm install && npm run deploy -- --message "Deploy commit ${{ github.sha }}" -u "github-actions-bot <support+actions@github.com>"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
