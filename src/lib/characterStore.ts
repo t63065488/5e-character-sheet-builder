@@ -46,7 +46,9 @@ export const updateCharacterRace = (newRace: Race) => {
             );
         });
 
-        
+      currentCharacter.abilityBonuses = currentCharacter.abilityBonuses.filter(
+        (bonus) => bonus.source !== Source.RACIAL,
+      );
     }
 
     newRace.abilityBonuses?.forEach((bonus) => {

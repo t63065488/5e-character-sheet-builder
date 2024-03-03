@@ -6,7 +6,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
-  plugins: [process.env.NODE_ENV === 'test' ? svelte() : sveltekit()],
+  plugins: [process.env.NODE_ENV === "test" ? svelte() : sveltekit()],
   test: {
     globals: true,
     environment: "jsdom",
