@@ -15,7 +15,7 @@ jobs:
       with:
         node-version: '20.x'
     - name: 
-      run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git && npm install && npm run deploy -- --message "Deploy commit ${{ github.sha }}" -u "github-actions-bot <support+actions@github.com>"
+      run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git && npm install && npm run deploy -- --message "Deploy commit ${{ github.sha }}" -u "t63065488 <t63065488@gmail.com>"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
