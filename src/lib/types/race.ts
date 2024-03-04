@@ -1,4 +1,4 @@
-import AbilityType from "./abilityType";
+import { AbilityBonus } from "./abilityBonus";
 
 export interface Race {
   name: string;
@@ -7,9 +7,4 @@ export interface Race {
   features: any[];
   abilityBonuses?: AbilityBonus[];
   heightRange?: string;
-}
-
-export interface AbilityBonus {
-  abilityType: AbilityType;
-  bonus: number;
 }

@@ -1,8 +1,10 @@
 <script lang="ts">
   import { Race } from "$lib/types/race";
-  import { characterInfoStore } from "$lib/stores";
+  import { characterStore, updateCharacterRace } from "$lib/characterStore";
 
   export let races: Race[] = [];
+
+  let selectedRace: Race;
 </script>
 
 <div class="flex w-full">
@@ -11,12 +13,16 @@
     <input
       class="input"
       type="text"
-      bind:value={$characterInfoStore.characterInfo.name}
+      bind:value={$characterStore.characterInfo.name}
     />
   </label>
   <label class="label">
     <span>Race</span>
-    <select class="select" bind:value={$characterInfoStore.characterInfo.race}>
+    <select
+      class="select"
+      bind:value={selectedRace}
+      on:change={() => updateCharacterRace(selectedRace)}
+    >
       {#each races as race}
         <option value={race}>{race.name}</option>
       {/each}

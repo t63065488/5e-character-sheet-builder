@@ -1,8 +1,9 @@
-import { AbilityBonus, Race } from "$lib/types/race";
 import "axios";
 import axios from "axios";
 import { raceStore, spellStore } from "$lib/stores";
-import AbilityType from "$lib/types/abilityType";
+import AbilityType from "$lib/enums/abilityType";
+import { AbilityBonus } from "$lib/types/abilityBonus";
+import Source from "$lib/enums/source";
 
 const apiBase = "https://www.dnd5eapi.co";
 
@@ -62,7 +63,8 @@ function mapAbilityBonuses(
     bonuses.push({
       abilityType:
         AbilityType[bonus.ability_score.name as keyof typeof AbilityType],
-      bonus: bonus.bonus,
+      bonusScore: bonus.bonus,
+      source: Source.RACIAL,
     });
   });
   return bonuses;
