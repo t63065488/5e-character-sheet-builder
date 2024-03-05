@@ -21,7 +21,7 @@ const config = {
   plugins: [
     require("@tailwindcss/forms"),
     skeleton({
-      themes: { preset: ["crimson"] },
+      themes: { preset: [{ name: "crimson", enhancements: true }] },
     }),
   ],
 } satisfies Config;
