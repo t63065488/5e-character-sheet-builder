@@ -5,6 +5,10 @@ A svelte project designed to enable the creation of 5e character sheets. This pr
 ### Developing
 
 ```bash
+npm run install
+```
+
+```bash
 npm run dev
 
 # or start the server and open the app in a new browser tab
