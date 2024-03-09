@@ -7,7 +7,7 @@
   import AbilityContainer from "./AbilityContainer.svelte";
   import { ArrowLeftSolid, ArrowRightSolid } from "flowbite-svelte-icons";
 
-  let abilityScores: AbilityScore[] = getDeafultAbilityScores(8);
+  export let abilityScores: AbilityScore[];
 
   let rolls: any[] = [];
 
