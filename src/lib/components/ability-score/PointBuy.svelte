@@ -5,7 +5,7 @@
     getDeafultAbilityScores,
   } from "$lib/types/abilityScore";
 
-  export const totalPoints: number = 27;
+  export let totalPoints: number = 27;
   export let availablePoints: number = totalPoints;
   export let abilityScores: AbilityScore[];
 
