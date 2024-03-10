@@ -4,10 +4,10 @@
   import {
     Accordion,
     AccordionItem,
-    ListBox,
-    ListBoxItem,
+    ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import RaceInfo from "./RaceInfo.svelte";
+  import { raceStore } from "$lib/stores";
 
   export let races: Race[] = [];
 </script>
@@ -36,14 +36,18 @@
   <hr />
   <div class="p-4" />
   <h2 class="step-header text-2xl font-bold">Available Races</h2>
-  <Accordion>
-    {#each races as race}
-      <AccordionItem>
-        <svelte:fragment slot="summary">{race.name}</svelte:fragment>
-        <svelte:fragment slot="content"
-          ><RaceInfo {race} selectEnabled={true} /></svelte:fragment
-        >
-      </AccordionItem>
-    {/each}
-  </Accordion>
+  {#if $raceStore.loaded}
+    <Accordion>
+      {#each races as race}
+        <AccordionItem>
+          <svelte:fragment slot="summary">{race.name}</svelte:fragment>
+          <svelte:fragment slot="content"
+            ><RaceInfo {race} selectEnabled={true} /></svelte:fragment
+          >
+        </AccordionItem>
+      {/each}
+    </Accordion>
+  {:else}
+    <ProgressRadial value={undefined} />
+  {/if}
 </div>
