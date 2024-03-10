@@ -14,7 +14,7 @@
     <Step>
       <svelte:fragment slot="header">Character Info</svelte:fragment>
       <CharacterInfo races={$raceStore.races} />
-    </Step>w
+    </Step>
     <Step>
       <svelte:fragment slot="header">Ability Scores</svelte:fragment>
       <AbilityScorePicker />
