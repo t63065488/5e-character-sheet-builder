@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { updateCharacterRace } from "$lib/characterStore";
+  import { characterStore, updateCharacterRace } from "$lib/characterStore";
   import { Race } from "$lib/types/race";
 
   export let race: Race;
@@ -17,7 +17,11 @@
     <button
       type="button"
       class="btn btn-sm variant-filled"
-      on:click={() => updateCharacterRace(race)}>Select</button
+      disabled={$characterStore.characterInfo.race === race}
+      on:click={() => updateCharacterRace(race)}
+      >{$characterStore.characterInfo.race === race
+        ? "Selected"
+        : "Select"}</button
     >
   {/if}
 </div>
