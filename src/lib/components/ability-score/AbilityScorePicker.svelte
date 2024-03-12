@@ -6,7 +6,10 @@
     AbilityScore,
     getDeafultAbilityScores,
   } from "$lib/types/abilityScore";
-  import { updateCharacterAbilityScores } from "$lib/characterStore";
+  import {
+    characterStore,
+    updateCharacterAbilityScores,
+  } from "$lib/characterStore";
 
   let currentTab: number = 0;
 
@@ -17,6 +20,10 @@
 
   // Random scores variables
   let randomScores: AbilityScore[] = getDeafultAbilityScores(8);
+
+  characterStore.subscribe((character) => {
+    // When character is updated, refresh the ability bonuses on the scores for individual pickers
+  });
 
   const handleChangeTab = (abilityScores: AbilityScore[]) => {
     updateCharacterAbilityScores(abilityScores);
