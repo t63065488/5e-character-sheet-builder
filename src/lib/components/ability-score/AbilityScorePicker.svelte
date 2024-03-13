@@ -4,6 +4,7 @@
   import RandomScores from "./RandomScores.svelte";
   import {
     AbilityScore,
+    getAbilityScore,
     getDeafultAbilityScores,
   } from "$lib/types/abilityScore";
   import {
@@ -21,8 +22,30 @@
   // Random scores variables
   let randomScores: AbilityScore[] = getDeafultAbilityScores(8);
 
+  const updateScoreBonus = (
+    characterStoreScores: AbilityScore[],
+    localScores: AbilityScore[],
+  ): AbilityScore[] => {
+    const newScores: AbilityScore[] = [];
+    localScores.forEach((score) => {
+      characterStoreScores
+        .filter((cScore) => cScore.abilityType === score.abilityType)
+        .map((cScore) => {
+          newScores.push(
+            getAbilityScore(
+              score.baseScore,
+              cScore.bonusScore,
+              score.abilityType,
+            ),
+          );
+        });
+    });
+    return newScores;
+  };
+
   characterStore.subscribe((character) => {
-    // When character is updated, refresh the ability bonuses on the scores for individual pickers
+    pointBuyScores = updateScoreBonus(character.abilityScores, pointBuyScores);
+    randomScores = updateScoreBonus(character.abilityScores, randomScores);
   });
 
   const handleChangeTab = (abilityScores: AbilityScore[]) => {
