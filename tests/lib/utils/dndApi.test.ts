@@ -7,7 +7,7 @@ import { Race } from "$lib/types/race";
 test("getRaces", async () => {
   await getRaces();
 
-  let loadedRaces: Race[] = get(raceStore);
+  let loadedRaces: Race[] = get(raceStore).races;
 
   expect(loadedRaces).not.toBeNull();
 });

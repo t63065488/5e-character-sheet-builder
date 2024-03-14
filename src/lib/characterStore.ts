@@ -67,6 +67,8 @@ export const updateCharacterRace = (newRace: Race) => {
         );
     });
 
+    currentCharacter.characterInfo.race = newRace;
+
     return currentCharacter;
   });
 };

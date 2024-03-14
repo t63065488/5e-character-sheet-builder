@@ -5,9 +5,9 @@
     getDeafultAbilityScores,
   } from "$lib/types/abilityScore";
 
-  const totalPoints: number = 27;
-  let availablePoints: number = 27;
-  let abilityBlocks: AbilityScore[] = getDeafultAbilityScores(8);
+  export let totalPoints: number = 27;
+  export let availablePoints: number = totalPoints;
+  export let abilityScores: AbilityScore[];
 
   const getCost = (newStat: number) => {
     return newStat > 13 ? 2 : 1;
@@ -39,7 +39,7 @@
   <p>Remaining Points: {availablePoints}/{totalPoints}</p>
 </div>
 <div class="grid grid-flow-row grid-flow-col gap-4">
-  {#each abilityBlocks as block}
+  {#each abilityScores as block}
     <div class="flex">
       <button
         type="button"
