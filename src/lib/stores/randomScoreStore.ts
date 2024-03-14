@@ -1,8 +1,8 @@
-import { AbilityScore } from "$lib/types/abilityScore";
+import { AbilityScore, getDeafultAbilityScores } from "$lib/types/abilityScore";
 import { Writable, writable } from "svelte/store";
 
-export const randomScoreStore: Writable<{ scores: AbilityScore[]; rolls: [] }> =
+export const randomScoreStore: Writable<{ scores: AbilityScore[]; rolls: number[][] }> =
   writable({
-    rolls: [],
-    scores: [],
+    rolls: [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]],
+    scores: getDeafultAbilityScores(0),
   });

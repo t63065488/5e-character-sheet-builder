@@ -11,6 +11,8 @@
     characterStore,
     updateCharacterAbilityScores,
   } from "$lib/characterStore";
+  import { pointBuyStore } from "$lib/stores/pointBuyStore";
+  import { randomScoreStore } from "$lib/stores/randomScoreStore";
 
   let currentTab: number = 0;
 
@@ -44,6 +46,21 @@
   };
 
   characterStore.subscribe((character) => {
+    pointBuyStore.update((pbStore) => {
+      return {
+        scores: updateScoreBonus(character.abilityScores, pbStore.scores),
+        totalPoints: pbStore.totalPoints,
+        availablePoints: pbStore.availablePoints,
+      }
+    }
+      
+    );
+    randomScoreStore.update((rStore) => {
+      return {
+        rolls: rStore.rolls,
+        scores: updateScoreBonus(character.abilityScores, rStore.scores),
+      };
+    });
     pointBuyScores = updateScoreBonus(character.abilityScores, pointBuyScores);
     randomScores = updateScoreBonus(character.abilityScores, randomScores);
   });
@@ -60,7 +77,7 @@
       bind:group={currentTab}
       name="tab1"
       value={0}
-      on:click={() => handleChangeTab(pointBuyScores)}
+      on:click={() => handleChangeTab($pointBuyStore.scores)}
     >
       <span>Point Buy</span>
     </Tab>
@@ -68,7 +85,7 @@
       bind:group={currentTab}
       name="tab2"
       value={1}
-      on:click={() => handleChangeTab(randomScores)}
+      on:click={() => handleChangeTab($randomScoreStore.scores)}
     >
       <span>Random</span>
     </Tab>
@@ -76,12 +93,12 @@
     <svelte:fragment slot="panel">
       {#if currentTab === 0}
         <PointBuy
-          bind:abilityScores={pointBuyScores}
-          bind:totalPoints={pointBuyTotalPoints}
-          bind:availablePoints={pointBuyAvailablePoints}
+          abilityScores={$pointBuyStore.scores}
+          bind:totalPoints={$pointBuyStore.totalPoints}
+          bind:availablePoints={$pointBuyStore.availablePoints}
         />
       {:else if currentTab === 1}
-        <RandomScores bind:abilityScores={randomScores} />
+        <RandomScores bind:abilityScores={$randomScoreStore.scores} bind:rolls={$randomScoreStore.rolls} />
       {/if}
     </svelte:fragment>
   </TabGroup>
