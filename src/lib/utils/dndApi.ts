@@ -1,9 +1,10 @@
 import "axios";
 import axios from "axios";
-import { raceStore, spellStore } from "$lib/stores";
+import { raceStore } from "$lib/stores";
 import AbilityType from "$lib/enums/abilityType";
 import { AbilityBonus } from "$lib/types/abilityBonus";
 import Source from "$lib/enums/source";
+import { spellStore } from "$lib/stores/spellStore";
 
 const apiBase = "https://www.dnd5eapi.co";
 
@@ -39,19 +40,15 @@ export async function getRaces() {
   });
 }
 
-export async function getSpells() {
+export async function getSpellEndpoints() {
   const spellEndpoints: [{ index: string; name: string; url: string }] = (
     await axios.get(apiBase + "/api/spells")
   ).data.results;
-  spellEndpoints.forEach((endpoint) => {
-    axios.get(apiBase + endpoint.url).then(
-      (newSpell) => {
-        spellStore.update((currentSpells) => [...currentSpells, newSpell.data]);
-      },
-      () => {
-        console.error("Error retrieving spell data.");
-      },
-    );
+  spellStore.update((spellStore) => {
+    return {
+      spellEndpoint: spellEndpoints,
+      spells: spellStore.spells,
+    };
   });
 }
 

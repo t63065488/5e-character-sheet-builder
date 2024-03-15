@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { getRaces, getSpells } from "$lib/utils/dndApi";
+  import { getRaces, getSpellEndpoints } from "$lib/utils/dndApi";
   import AbilityScorePicker from "./ability-score/AbilityScorePicker.svelte";
   import CharacterInfo from "./character-info/CharacterInfo.svelte";
   import { Stepper, Step } from "@skeletonlabs/skeleton";
   import { raceStore } from "$lib/stores";
 
   getRaces();
-  getSpells();
+  getSpellEndpoints();
 </script>
 
 <div class="w-full">

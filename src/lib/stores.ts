@@ -5,6 +5,3 @@ import { Race } from "./types/race";
 export const raceStore: Writable<{ races: Race[]; loaded: boolean }> = writable(
   { races: [], loaded: false },
 );
-
-// Store for storing available spells
-export const spellStore: Writable<any[]> = writable([]);
