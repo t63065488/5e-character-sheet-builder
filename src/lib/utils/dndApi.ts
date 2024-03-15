@@ -38,7 +38,7 @@ export const getRaces = async () => {
       },
     );
   });
-}
+};
 
 export const getSpellEndpoints = async () => {
   const spellEndpoints: [{ index: string; name: string; url: string }] = (
@@ -50,16 +50,16 @@ export const getSpellEndpoints = async () => {
       spells: spellStore.spells,
     };
   });
-}
+};
 
-const mapAbilityBonuses = () => (
+const mapAbilityBonuses = (
   abilityBonuses: [
     {
       ability_score: { index: string; name: string; url: string };
       bonus: number;
     },
   ],
-): AbilityBonus[] {
+): AbilityBonus[] => {
   let bonuses: AbilityBonus[] = [];
   abilityBonuses.forEach((bonus) => {
     bonuses.push({
@@ -70,4 +70,4 @@ const mapAbilityBonuses = () => (
     });
   });
   return bonuses;
-}
+};
