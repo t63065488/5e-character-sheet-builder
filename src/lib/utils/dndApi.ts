@@ -8,7 +8,7 @@ import { spellStore } from "$lib/stores/spellStore";
 
 const apiBase = "https://www.dnd5eapi.co";
 
-export async function getRaces() {
+export const getRaces = async () => {
   const raceEndpoints: [{ index: string; name: string; url: string }] = (
     await axios.get(apiBase + "/api/races")
   ).data.results;
@@ -40,7 +40,7 @@ export async function getRaces() {
   });
 }
 
-export async function getSpellEndpoints() {
+export const getSpellEndpoints = async () => {
   const spellEndpoints: [{ index: string; name: string; url: string }] = (
     await axios.get(apiBase + "/api/spells")
   ).data.results;
@@ -52,7 +52,7 @@ export async function getSpellEndpoints() {
   });
 }
 
-function mapAbilityBonuses(
+const mapAbilityBonuses = () => (
   abilityBonuses: [
     {
       ability_score: { index: string; name: string; url: string };
