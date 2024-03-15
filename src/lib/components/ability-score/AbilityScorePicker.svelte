@@ -18,8 +18,6 @@
 
   // Point Buy variables
   let pointBuyScores: AbilityScore[] = getDeafultAbilityScores(8);
-  let pointBuyTotalPoints: number = 27;
-  let pointBuyAvailablePoints: number = pointBuyTotalPoints;
 
   // Random scores variables
   let randomScores: AbilityScore[] = getDeafultAbilityScores(8);
