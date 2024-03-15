@@ -46,7 +46,7 @@ export async function getSpellEndpoints() {
   ).data.results;
   spellStore.update((spellStore) => {
     return {
-      spellEndpoint: spellEndpoints,
+      spellEndpoints: spellEndpoints,
       spells: spellStore.spells,
     };
   });
