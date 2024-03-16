@@ -4,6 +4,7 @@
   import CharacterInfo from "./character-info/CharacterInfo.svelte";
   import { Stepper, Step } from "@skeletonlabs/skeleton";
   import { raceStore } from "$lib/stores";
+  import SpellPicker from "./spells/SpellPicker.svelte";
 
   getRaces();
   getSpellEndpoints();
@@ -18,6 +19,10 @@
     <Step>
       <svelte:fragment slot="header">Ability Scores</svelte:fragment>
       <AbilityScorePicker />
+    </Step>
+    <Step>
+      <svelte:fragment slot="header">Spells</svelte:fragment>
+      <SpellPicker />
     </Step>
   </Stepper>
 </div>

@@ -45,6 +45,7 @@ export const getSpellEndpoints = async () => {
     await axios.get(apiBase + "/api/spells")
   ).data.results;
   spellStore.update((spellStore) => {
+    console.log(spellEndpoints);
     return {
       spellEndpoints: spellEndpoints,
       spells: spellStore.spells,
