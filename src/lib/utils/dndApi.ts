@@ -11,13 +11,27 @@ const API_BASE = "https://www.dnd5eapi.co";
 const RACE_ENDPOINT: string = "/api/races";
 const SPELL_ENDPOINT: string = "/api/spells";
 
-export const getRaceEndpoints = async (): Promise<string | string> => {
-  return await fetch(API_BASE + RACE_ENDPOINT)
+interface GetEndpointsReponse {
+  name: string;
+  url: string;
+  index: string;
+}
+
+export const getRaceEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  return getEndpoints(RACE_ENDPOINT);
+};
+
+export const getSpellEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  return getEndpoints(SPELL_ENDPOINT);
+};
+
+const getEndpoints = async (endpoint: string) => {
+  return await fetch(API_BASE + endpoint)
     .then((response) => response.json())
-    .then((responseJson) => responseJson)
+    .then((endpoints: GetEndpointsReponse[]) => endpoints)
     .catch((error) => {
-      console.log(error);
-      return "";
+      console.error(error);
+      return [];
     });
 };
 
@@ -50,18 +64,6 @@ export const getRaces = async () => {
         console.error("Error retrieving race data.");
       },
     );
-  });
-};
-
-export const getSpellEndpoints = async () => {
-  const spellEndpoints: [{ index: string; name: string; url: string }] = (
-    await axios.get(API_BASE + "/api/spells")
-  ).data.results;
-  spellStore.update((spellStore) => {
-    return {
-      spellEndpoints: spellEndpoints,
-      spells: spellStore.spells,
-    };
   });
 };
 
