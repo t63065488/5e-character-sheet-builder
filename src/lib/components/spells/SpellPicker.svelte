@@ -6,14 +6,16 @@
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
 
-  const getSpellDefinition = (endpointUrl: string) => {
-    loadSpell(endpointUrl);
+  const getSpellDefinition = (name: string, endpointUrl: string) => {
+    loadSpell(name, endpointUrl);
   };
 </script>
 
 <Accordion autocollapse>
   {#each $spellStore.spellEndpoints as endpoint}
-    <AccordionItem on:click={() => getSpellDefinition(endpoint.url)}>
+    <AccordionItem
+      on:click={() => getSpellDefinition(endpoint.name, endpoint.url)}
+    >
       <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
       <svelte:fragment slot="content">
         {#if $spellStore.spells.find((spell) => endpoint.name === spell.name)}
