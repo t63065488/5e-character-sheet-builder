@@ -41,11 +41,9 @@
         >
           <svelte:fragment slot="summary">{raceEndpoint.name}</svelte:fragment>
           <svelte:fragment slot="content">
-            {#if $raceStore.races.filter((race) => race.name === raceEndpoint.name)[0]}
+            {#if $raceStore.races[raceEndpoint.name]}
               <RaceInfo
-                race={$raceStore.races.filter(
-                  (race) => race.name === raceEndpoint.name,
-                )[0]}
+                race={$raceStore.races[raceEndpoint.name]}
                 selectEnabled={true}
               />
             {:else}

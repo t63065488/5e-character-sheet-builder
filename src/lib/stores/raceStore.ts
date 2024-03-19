@@ -9,9 +9,9 @@ import {
 // Store for storing available race options
 export const raceStore: Writable<{
   raceEndpoints: GetEndpointsReponse[];
-  races: Race[];
+  races: { [name: string]: Race };
   loaded: boolean;
-}> = writable({ raceEndpoints: [], races: [], loaded: false });
+}> = writable({ raceEndpoints: [], races: {}, loaded: false });
 
 export const loadRaceEndpoints = async () => {
   await getRaceEndpoints().then((endpoints: GetEndpointsReponse[]) => {
@@ -24,10 +24,10 @@ export const loadRaceEndpoints = async () => {
 
 export const loadRace = (name: string, endpoint: string) => {
   raceStore.update((store) => {
-    if (store.races.filter((race) => race.name === name).length === 0) {
+    if (!(name in store.races)) {
       getRace(endpoint)
         .then((race) => {
-          store.races = [...store.races, race];
+          store.races[name] = race;
         })
         .catch((error) => {
           console.error("There was an error when loading race " + name);

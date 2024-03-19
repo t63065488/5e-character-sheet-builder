@@ -1,27 +1,43 @@
-import { getSpell } from "$lib/utils/dndApi";
+import {
+  GetEndpointsReponse,
+  getSpell,
+  getSpellEndpoints,
+} from "$lib/utils/dndApi";
 import { Writable, writable } from "svelte/store";
 
 // Store for storing available spells
-export const spellStore: Writable<{ spellEndpoints: any[]; spells: any[] }> =
-  writable({
-    spellEndpoints: [],
-    spells: [],
+export const spellStore: Writable<{
+  spellEndpoints: any[];
+  loaded: boolean;
+  spells: { [name: string]: any };
+}> = writable({
+  spellEndpoints: [],
+  loaded: false,
+  spells: {},
+});
+
+export const loadSpellEndpoints = async () => {
+  await getSpellEndpoints().then((endpoints: GetEndpointsReponse[]) => {
+    spellStore.update((store) => {
+      store.spellEndpoints = endpoints;
+      store.loaded = true;
+      return store;
+    });
   });
+};
 
 export const loadSpell = (name: string, endpointUrl: string) => {
   spellStore.update((spellStore) => {
-    getSpell(endpointUrl)
-      .then((spell) => {
-        if (
-          spellStore.spells.filter((spell) => spell.name === name).length === 0
-        ) {
-          spellStore.spells.push(spell);
-        }
-      })
-      .catch((error) => {
-        console.error("There was en error retrieving spell " + name);
-        console.error(error);
-      });
+    if (!(name in spellStore.spells)) {
+      getSpell(endpointUrl)
+        .then((spell) => {
+          spellStore.spells[name] = spell;
+        })
+        .catch((error) => {
+          console.error("There was en error retrieving spell " + name);
+          console.error(error);
+        });
+    }
     return spellStore;
   });
 };

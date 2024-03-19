@@ -18,7 +18,7 @@
     >
       <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
       <svelte:fragment slot="content">
-        {#if $spellStore.spells.find((spell) => endpoint.name === spell.name)}
+        {#if $spellStore.spells[endpoint.name]}
           <p>Spell loaded</p>
         {:else}
           <ProgressRadial value={undefined} />
