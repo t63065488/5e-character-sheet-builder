@@ -6,6 +6,7 @@ import { AbilityBonus } from "$lib/types/abilityBonus";
 import Source from "$lib/enums/source";
 import { spellStore } from "$lib/stores/spellStore";
 import { Race } from "$lib/types/race";
+import { Spell } from "$lib/types/spell";
 
 const API_BASE = "https://www.dnd5eapi.co";
 
@@ -57,10 +58,29 @@ export const getRace = async (endpoint: string): Promise<Race> => {
     });
 };
 
-export const getSpell = async (endpointUrl: string): Promise<any> => {
+export const getSpell = async (endpointUrl: string): Promise<Spell> => {
   return fetch(API_BASE + endpointUrl)
     .then((response) => response.json())
-    .then((jsonReponse) => jsonReponse)
+    .then((jsonReponse): Spell => {
+      console.log(jsonReponse);
+      return {
+        name: jsonReponse.name,
+        description: jsonReponse.desc,
+        range: jsonReponse.range,
+        components: jsonReponse.components,
+        ritual: jsonReponse.ritual,
+        duration: jsonReponse.duration,
+        concentration: jsonReponse.concentration,
+        level: jsonReponse.levl,
+        school: jsonReponse.school,
+        classes: jsonReponse.classes,
+        higherLevelCasting: jsonReponse.higher_level,
+        material: jsonReponse.material,
+        attackType: jsonReponse.attackType,
+        damage: jsonReponse.damage,
+        subclasses: jsonReponse.subclasses,
+      };
+    })
     .catch((errorResponse) => {
       throw new Error(errorResponse);
     });

@@ -1,3 +1,4 @@
+import { Spell } from "$lib/types/spell";
 import {
   GetEndpointsReponse,
   getSpell,
@@ -9,7 +10,7 @@ import { Writable, writable } from "svelte/store";
 export const spellStore: Writable<{
   spellEndpoints: any[];
   loaded: boolean;
-  spells: { [name: string]: any };
+  spells: { [name: string]: Spell };
 }> = writable({
   spellEndpoints: [],
   loaded: false,
@@ -31,6 +32,7 @@ export const loadSpell = (name: string, endpointUrl: string) => {
     if (!(name in spellStore.spells)) {
       getSpell(endpointUrl)
         .then((spell) => {
+          console.log(spell);
           spellStore.spells[name] = spell;
         })
         .catch((error) => {

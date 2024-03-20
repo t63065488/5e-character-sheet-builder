@@ -5,7 +5,7 @@
     AccordionItem,
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
-    import SpellInfo from "./SpellInfo.svelte";
+  import SpellInfo from "./SpellInfo.svelte";
 
   const getSpellDefinition = (name: string, endpointUrl: string) => {
     loadSpell(name, endpointUrl);
@@ -20,7 +20,7 @@
       <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
       <svelte:fragment slot="content">
         {#if $spellStore.spells[endpoint.name]}
-          <SpellInfo spell={$spellStore.spells[endpoint.name]}/>
+          <SpellInfo spell={$spellStore.spells[endpoint.name]} />
         {:else}
           <ProgressRadial value={undefined} />
         {/if}

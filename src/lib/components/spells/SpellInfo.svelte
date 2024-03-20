@@ -1,7 +1,10 @@
 <script lang="ts">
-  export let spell: any;
+  import { Spell } from "$lib/types/spell";
+
+  export let spell: Spell;
 </script>
 
 <div>
-  <p>{spell}</p>
+  <p>{spell.name}</p>
+  <p>{spell.description}</p>
 </div>
