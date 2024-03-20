@@ -1,15 +1,12 @@
 <script lang="ts">
-  import { Race } from "$lib/types/race";
-  import { characterStore, updateCharacterRace } from "$lib/characterStore";
+  import { characterStore } from "$lib/characterStore";
   import {
     Accordion,
     AccordionItem,
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import RaceInfo from "./RaceInfo.svelte";
-  import { raceStore } from "$lib/stores";
-
-  export let races: Race[] = [];
+  import { loadRace, raceStore } from "$lib/stores/raceStore";
 </script>
 
 <div class="p-4">
@@ -38,12 +35,21 @@
   <h2 class="step-header text-2xl font-bold">Available Races</h2>
   {#if $raceStore.loaded}
     <Accordion>
-      {#each races as race}
-        <AccordionItem>
-          <svelte:fragment slot="summary">{race.name}</svelte:fragment>
-          <svelte:fragment slot="content"
-            ><RaceInfo {race} selectEnabled={true} /></svelte:fragment
-          >
+      {#each $raceStore.raceEndpoints as raceEndpoint}
+        <AccordionItem
+          on:click={() => loadRace(raceEndpoint.name, raceEndpoint.url)}
+        >
+          <svelte:fragment slot="summary">{raceEndpoint.name}</svelte:fragment>
+          <svelte:fragment slot="content">
+            {#if $raceStore.races[raceEndpoint.name]}
+              <RaceInfo
+                race={$raceStore.races[raceEndpoint.name]}
+                selectEnabled={true}
+              />
+            {:else}
+              <ProgressRadial value={undefined} />
+            {/if}
+          </svelte:fragment>
         </AccordionItem>
       {/each}
     </Accordion>

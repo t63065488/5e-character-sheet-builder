@@ -1,68 +1,99 @@
 import "axios";
 import axios from "axios";
-import { raceStore, spellStore } from "$lib/stores";
+import { raceStore } from "$lib/stores/raceStore";
 import AbilityType from "$lib/enums/abilityType";
 import { AbilityBonus } from "$lib/types/abilityBonus";
 import Source from "$lib/enums/source";
+import { spellStore } from "$lib/stores/spellStore";
+import { Race } from "$lib/types/race";
+import { Spell } from "$lib/types/spell";
 
-const apiBase = "https://www.dnd5eapi.co";
+const API_BASE = "https://www.dnd5eapi.co";
 
-export async function getRaces() {
-  const raceEndpoints: [{ index: string; name: string; url: string }] = (
-    await axios.get(apiBase + "/api/races")
-  ).data.results;
-  raceEndpoints.forEach((endpoint, index) => {
-    axios.get(apiBase + endpoint.url).then(
-      (race) => {
-        let raceData = race.data;
-        raceStore.update((currentStore) => {
-          return {
-            loaded: index === raceEndpoints.length - 1,
-            races: [
-              ...currentStore.races,
-              {
-                name: raceData.name,
-                size: raceData.size,
-                speed: raceData.speed,
-                features: raceData.traits,
-                abilityBonuses: mapAbilityBonuses(raceData.ability_bonuses),
-                heightRange: raceData.size_description,
-              },
-            ],
-          };
-        });
-      },
-      () => {
-        console.error("Error retrieving race data.");
-      },
-    );
-  });
+const RACE_ENDPOINT: string = "/api/races";
+const SPELL_ENDPOINT: string = "/api/spells";
+
+export interface GetEndpointsReponse {
+  name: string;
+  url: string;
+  index: string;
 }
 
-export async function getSpells() {
-  const spellEndpoints: [{ index: string; name: string; url: string }] = (
-    await axios.get(apiBase + "/api/spells")
-  ).data.results;
-  spellEndpoints.forEach((endpoint) => {
-    axios.get(apiBase + endpoint.url).then(
-      (newSpell) => {
-        spellStore.update((currentSpells) => [...currentSpells, newSpell.data]);
-      },
-      () => {
-        console.error("Error retrieving spell data.");
-      },
-    );
-  });
-}
+export const getRaceEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  return getEndpoints(RACE_ENDPOINT);
+};
 
-function mapAbilityBonuses(
+export const getSpellEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  return getEndpoints(SPELL_ENDPOINT);
+};
+
+const getEndpoints = async (
+  endpoint: string,
+): Promise<GetEndpointsReponse[]> => {
+  return fetch(API_BASE + endpoint)
+    .then((response) => response.json())
+    .then((json) => json.results)
+    .then((endpoints: GetEndpointsReponse[]) => endpoints)
+    .catch((error) => {
+      console.error(error);
+      return [];
+    });
+};
+
+export const getRace = async (endpoint: string): Promise<Race> => {
+  return fetch(API_BASE + endpoint)
+    .then((response) => response.json())
+    .then((raceData) => {
+      return {
+        name: raceData.name,
+        size: raceData.size,
+        speed: raceData.speed,
+        features: raceData.traits,
+        abilityBonuses: mapAbilityBonuses(raceData.ability_bonuses),
+        heightRange: raceData.size_description,
+      };
+    })
+    .catch((errorResponse) => {
+      throw new Error(errorResponse);
+    });
+};
+
+export const getSpell = async (endpointUrl: string): Promise<Spell> => {
+  return fetch(API_BASE + endpointUrl)
+    .then((response) => response.json())
+    .then((jsonReponse): Spell => {
+      console.log(jsonReponse);
+      return {
+        name: jsonReponse.name,
+        description: jsonReponse.desc,
+        range: jsonReponse.range,
+        components: jsonReponse.components,
+        ritual: jsonReponse.ritual,
+        duration: jsonReponse.duration,
+        concentration: jsonReponse.concentration,
+        level: jsonReponse.levl,
+        school: jsonReponse.school,
+        classes: jsonReponse.classes,
+        higherLevelCasting: jsonReponse.higher_level,
+        material: jsonReponse.material,
+        attackType: jsonReponse.attackType,
+        damage: jsonReponse.damage,
+        subclasses: jsonReponse.subclasses,
+      };
+    })
+    .catch((errorResponse) => {
+      throw new Error(errorResponse);
+    });
+};
+
+const mapAbilityBonuses = (
   abilityBonuses: [
     {
       ability_score: { index: string; name: string; url: string };
       bonus: number;
     },
   ],
-): AbilityBonus[] {
+): AbilityBonus[] => {
   let bonuses: AbilityBonus[] = [];
   abilityBonuses.forEach((bonus) => {
     bonuses.push({
@@ -73,4 +104,4 @@ function mapAbilityBonuses(
     });
   });
   return bonuses;
-}
+};

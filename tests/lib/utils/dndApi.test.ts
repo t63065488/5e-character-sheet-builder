@@ -1,4 +1,4 @@
-import { getRaces, getSpells } from "$lib/utils/dndApi";
+import { getRaces, getSpellEndpoints } from "$lib/utils/dndApi";
 import { expect, test } from "vitest";
 import { get } from "svelte/store";
 import { raceStore, spellStore } from "$lib/stores";
@@ -13,7 +13,7 @@ test("getRaces", async () => {
 });
 
 test("getSpells", async () => {
-  await getSpells();
+  await getSpellEndpoints();
 
   let loadedSpells: Race[] = get(spellStore);
 

@@ -16,14 +16,6 @@
 
   let currentTab: number = 0;
 
-  // Point Buy variables
-  let pointBuyScores: AbilityScore[] = getDeafultAbilityScores(8);
-  let pointBuyTotalPoints: number = 27;
-  let pointBuyAvailablePoints: number = pointBuyTotalPoints;
-
-  // Random scores variables
-  let randomScores: AbilityScore[] = getDeafultAbilityScores(8);
-
   const updateScoreBonus = (
     characterStoreScores: AbilityScore[],
     localScores: AbilityScore[],
@@ -51,18 +43,14 @@
         scores: updateScoreBonus(character.abilityScores, pbStore.scores),
         totalPoints: pbStore.totalPoints,
         availablePoints: pbStore.availablePoints,
-      }
-    }
-      
-    );
+      };
+    });
     randomScoreStore.update((rStore) => {
       return {
         rolls: rStore.rolls,
         scores: updateScoreBonus(character.abilityScores, rStore.scores),
       };
     });
-    pointBuyScores = updateScoreBonus(character.abilityScores, pointBuyScores);
-    randomScores = updateScoreBonus(character.abilityScores, randomScores);
   });
 
   const handleChangeTab = (abilityScores: AbilityScore[]) => {
@@ -98,7 +86,10 @@
           bind:availablePoints={$pointBuyStore.availablePoints}
         />
       {:else if currentTab === 1}
-        <RandomScores bind:abilityScores={$randomScoreStore.scores} bind:rolls={$randomScoreStore.rolls} />
+        <RandomScores
+          bind:abilityScores={$randomScoreStore.scores}
+          bind:rolls={$randomScoreStore.rolls}
+        />
       {/if}
     </svelte:fragment>
   </TabGroup>
