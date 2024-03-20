@@ -7,13 +7,31 @@ import {
 } from "./types/abilityScore";
 import { Race } from "./types/race";
 import Source from "./enums/source";
+import { Spell } from "./types/spell";
 
 export const characterStore: Writable<Character> = writable({
   characterInfo: {},
   abilityScores: getDeafultAbilityScores(),
   abilityBonuses: [],
   features: [],
+  spells: [],
 });
+
+export const addCharacterSpell = (spell: Spell) => {
+  characterStore.update((store) => {
+    store.spells.push(spell);
+    return store;
+  });
+};
+
+export const removeCharacterSpell = (spell: Spell) => {
+  characterStore.update((store) => {
+    store.spells = store.spells.filter(
+      (characterSpell) => characterSpell !== spell,
+    );
+    return store;
+  });
+};
 
 export const updateCharacterAbilityScores = (scores: AbilityScore[]) => {
   characterStore.update((store) => {

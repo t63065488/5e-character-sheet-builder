@@ -20,7 +20,10 @@
       <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
       <svelte:fragment slot="content">
         {#if $spellStore.spells[endpoint.name]}
-          <SpellInfo spell={$spellStore.spells[endpoint.name]} />
+          <SpellInfo
+            spell={$spellStore.spells[endpoint.name]}
+            selectEnabled={true}
+          />
         {:else}
           <ProgressRadial value={undefined} />
         {/if}
