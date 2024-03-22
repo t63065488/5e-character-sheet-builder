@@ -12,6 +12,7 @@ const API_BASE = "https://www.dnd5eapi.co";
 
 const RACE_ENDPOINT: string = "/api/races";
 const SPELL_ENDPOINT: string = "/api/spells";
+const CLASS_ENDPOINT: string = "/api/classes";
 
 export interface GetEndpointsReponse {
   name: string;
@@ -25,6 +26,10 @@ export const getRaceEndpoints = async (): Promise<GetEndpointsReponse[]> => {
 
 export const getSpellEndpoints = async (): Promise<GetEndpointsReponse[]> => {
   return getEndpoints(SPELL_ENDPOINT);
+};
+
+export const getClassEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  return getEndpoints(CLASS_ENDPOINT);
 };
 
 const getEndpoints = async (

@@ -1,3 +1,1 @@
-export interface CharacterClass {
-    
-}
+export interface CharacterClass {}

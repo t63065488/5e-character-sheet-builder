@@ -6,10 +6,12 @@
   import SpellPicker from "./spells/SpellPicker.svelte";
   import { onMount } from "svelte";
   import { loadSpellEndpoints } from "$lib/stores/spellStore";
+    import { loadClassEndpoints } from "$lib/stores/classStore";
 
   onMount(async () => {
     loadRaceEndpoints();
     loadSpellEndpoints();
+    loadClassEndpoints();
   });
 </script>
 
