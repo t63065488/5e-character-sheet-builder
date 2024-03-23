@@ -32,7 +32,6 @@ export const loadSpell = (name: string, endpointUrl: string) => {
     if (!(name in spellStore.spells)) {
       getSpell(endpointUrl)
         .then((spell) => {
-          console.log(spell);
           spellStore.spells[name] = spell;
         })
         .catch((error) => {

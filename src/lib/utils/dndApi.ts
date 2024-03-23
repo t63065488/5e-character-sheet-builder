@@ -91,6 +91,15 @@ export const getSpell = async (endpointUrl: string): Promise<Spell> => {
     });
 };
 
+export const getClass = async (endpointUrl: String): Promise<any> => {
+  return fetch(API_BASE + endpointUrl)
+    .then((response) => response.json())
+    .then((jsonReponse) => {
+      console.log(jsonReponse);
+      return jsonReponse;
+    });
+};
+
 const mapAbilityBonuses = (
   abilityBonuses: [
     {
