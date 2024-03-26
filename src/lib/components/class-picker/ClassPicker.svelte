@@ -10,7 +10,7 @@
       <AccordionItem on:click={() => loadClass(endpoint.name, endpoint.url)}>
         <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
         <svelte:fragment slot="content">
-          <ClassInfo />
+          <ClassInfo characterClass={$classStore.classes[endpoint.name]} />
         </svelte:fragment>
       </AccordionItem>
     {/each}

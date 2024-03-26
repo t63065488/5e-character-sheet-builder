@@ -1,1 +1,3 @@
-<script lang="ts"></script>
+<script lang="ts">
+  export let characterClass: any;
+</script>
