@@ -1,3 +1,9 @@
 <script lang="ts">
-  export let characterClass: any;
+  import { CharacterClass } from "$lib/types/characterClass";
+
+  export let characterClass: CharacterClass;
 </script>
+
+<div>
+  <!-- <p>{characterClass}</p> -->
+</div>
