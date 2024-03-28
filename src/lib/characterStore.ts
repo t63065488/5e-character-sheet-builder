@@ -13,6 +13,7 @@ export const characterStore: Writable<Character> = writable({
   characterInfo: {},
   abilityScores: getDeafultAbilityScores(),
   abilityBonuses: [],
+  classes: [],
   features: [],
   spells: [],
 });
