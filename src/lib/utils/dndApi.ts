@@ -95,7 +95,14 @@ export const getClass = async (endpointUrl: String): Promise<any> => {
   return fetch(API_BASE + endpointUrl)
     .then((response) => response.json())
     .then((jsonReponse) => {
-      console.log(jsonReponse);
+      return jsonReponse;
+    });
+};
+
+export const getClassLevels = async (endpointUrl: string): Promise<any> => {
+  return fetch(API_BASE + endpointUrl)
+    .then((response) => response.json())
+    .then((jsonReponse) => {
       return jsonReponse;
     });
 };

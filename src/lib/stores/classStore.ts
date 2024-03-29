@@ -1,6 +1,8 @@
 import {
   getClass,
   getClassEndpoints,
+  getClassLevel,
+  getClassLevels,
   GetEndpointsReponse,
 } from "$lib/utils/dndApi";
 import { writable, Writable } from "svelte/store";
@@ -30,12 +32,25 @@ export const loadClass = (name: string, endpointUrl: string) => {
     if (!(name in store.classes)) {
       getClass(endpointUrl)
         .then((returnedClass) => {
+          console.log(returnedClass);
           store.classes[name] = returnedClass;
         })
         .catch((error) => {
           console.error("There was an error retrieving class " + name);
           console.error(error);
         });
+    }
+    return store;
+  });
+};
+
+export const loadClassLevels = (name: string, endpointUrl: string) => {
+  classStore.update((store) => {
+    if (store.classes[name].classLevels == null) {
+      getClassLevels(endpointUrl).then((classLevels) => {
+        console.log(classLevels);
+        store.classes[name].levels = classLevels;
+      });
     }
     return store;
   });
