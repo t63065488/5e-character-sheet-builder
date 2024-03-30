@@ -1,6 +1,10 @@
 <script lang="ts">
   import { classStore, loadClass } from "$lib/stores/classStore";
-  import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
+  import {
+    Accordion,
+    AccordionItem,
+    ProgressRadial,
+  } from "@skeletonlabs/skeleton";
   import ClassInfo from "./ClassInfo.svelte";
   import { characterStore } from "$lib/characterStore";
 </script>
@@ -18,7 +22,11 @@
       <AccordionItem on:click={() => loadClass(endpoint.name, endpoint.url)}>
         <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
         <svelte:fragment slot="content">
-          <ClassInfo characterClass={$classStore.classes[endpoint.name]} />
+          {#if $classStore.classes[endpoint.name] !== undefined}
+            <ClassInfo characterClass={$classStore.classes[endpoint.name]} />
+          {:else}
+            <ProgressRadial value={undefined} />
+          {/if}
         </svelte:fragment>
       </AccordionItem>
     {/each}

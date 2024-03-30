@@ -1,7 +1,6 @@
 import {
   getClass,
   getClassEndpoints,
-  getClassLevel,
   getClassLevels,
   GetEndpointsReponse,
 } from "$lib/utils/dndApi";
@@ -44,10 +43,10 @@ export const loadClass = (name: string, endpointUrl: string) => {
   });
 };
 
-export const loadClassLevels = (name: string, endpointUrl: string) => {
+export const loadClassLevels = (name: string) => {
   classStore.update((store) => {
     if (store.classes[name].classLevels == null) {
-      getClassLevels(endpointUrl).then((classLevels) => {
+      getClassLevels(name).then((classLevels) => {
         console.log(classLevels);
         store.classes[name].levels = classLevels;
       });

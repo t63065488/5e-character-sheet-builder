@@ -67,7 +67,6 @@ export const getSpell = async (endpointUrl: string): Promise<Spell> => {
   return fetch(API_BASE + endpointUrl)
     .then((response) => response.json())
     .then((jsonReponse): Spell => {
-      console.log(jsonReponse);
       return {
         name: jsonReponse.name,
         description: jsonReponse.desc,
@@ -99,8 +98,10 @@ export const getClass = async (endpointUrl: String): Promise<any> => {
     });
 };
 
-export const getClassLevels = async (endpointUrl: string): Promise<any> => {
-  return fetch(API_BASE + endpointUrl)
+export const getClassLevels = async (className: string): Promise<any> => {
+  return fetch(
+    API_BASE + CLASS_ENDPOINT + "/" + className.toLowerCase() + "/levels",
+  )
     .then((response) => response.json())
     .then((jsonReponse) => {
       return jsonReponse;
