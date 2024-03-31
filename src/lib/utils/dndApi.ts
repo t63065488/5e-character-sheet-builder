@@ -1,5 +1,3 @@
-import "axios";
-import axios from "axios";
 import { raceStore } from "$lib/stores/raceStore";
 import AbilityType from "$lib/enums/abilityType";
 import { AbilityBonus } from "$lib/types/abilityBonus";
