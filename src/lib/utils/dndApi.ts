@@ -27,6 +27,7 @@ export const getSpellEndpoints = async (): Promise<GetEndpointsReponse[]> => {
 };
 
 export const getClassEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  console.log("Called");
   return getEndpoints(CLASS_ENDPOINT);
 };
 
