@@ -12,7 +12,6 @@
     getClass,
     getClassEndpoints,
   } from "$lib/utils/dndApi";
-  import { CharacterClass } from "$lib/types/characterClass";
 
   let selectedClass: GetEndpointsReponse;
 

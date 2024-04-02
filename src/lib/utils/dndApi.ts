@@ -90,6 +90,7 @@ export const getSpell = async (endpointUrl: string): Promise<Spell> => {
 };
 
 export const getClass = async (endpointUrl: String): Promise<any> => {
+  console.log(endpointUrl);
   return fetch(API_BASE + endpointUrl)
     .then((response) => response.json())
     .then((jsonReponse) => {

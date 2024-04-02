@@ -1,15 +1,25 @@
 <script lang="ts">
   import { loadClassLevels } from "$lib/stores/classStore";
   import { CharacterClass } from "$lib/types/characterClass";
+  import { getClassLevels } from "$lib/utils/dndApi";
+  import { ProgressRadial } from "@skeletonlabs/skeleton";
   import { onMount } from "svelte";
 
   export let characterClass: CharacterClass;
 
+  let classLevels: Promise<any>;
+
   onMount(async () => {
-    loadClassLevels(characterClass.name);
+    classLevels = getClassLevels(characterClass.name);
   });
 </script>
 
 <div>
-  <!-- <p>{characterClass}</p> -->
+  {#await classLevels}
+    <ProgressRadial value={undefined} />
+  {:then levels}
+    <p>{levels}</p>
+  {:catch}
+    <p>Error</p>
+  {/await}
 </div>
