@@ -8,7 +8,7 @@ import { Writable, writable } from "svelte/store";
 
 // Store for storing available spells
 export const spellStore: Writable<{
-  spellEndpoints: any[];
+  spellEndpoints: GetEndpointsReponse[];
   loaded: boolean;
   spells: { [name: string]: Spell };
 }> = writable({
@@ -32,7 +32,6 @@ export const loadSpell = (name: string, endpointUrl: string) => {
     if (!(name in spellStore.spells)) {
       getSpell(endpointUrl)
         .then((spell) => {
-          console.log(spell);
           spellStore.spells[name] = spell;
         })
         .catch((error) => {

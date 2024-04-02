@@ -1,5 +1,3 @@
-import "axios";
-import axios from "axios";
 import { raceStore } from "$lib/stores/raceStore";
 import AbilityType from "$lib/enums/abilityType";
 import { AbilityBonus } from "$lib/types/abilityBonus";
@@ -7,11 +5,14 @@ import Source from "$lib/enums/source";
 import { spellStore } from "$lib/stores/spellStore";
 import { Race } from "$lib/types/race";
 import { Spell } from "$lib/types/spell";
+import { CharacterClass } from "$lib/types/characterClass";
+import { json } from "stream/consumers";
 
 const API_BASE = "https://www.dnd5eapi.co";
 
 const RACE_ENDPOINT: string = "/api/races";
 const SPELL_ENDPOINT: string = "/api/spells";
+const CLASS_ENDPOINT: string = "/api/classes";
 
 export interface GetEndpointsReponse {
   name: string;
@@ -25,6 +26,10 @@ export const getRaceEndpoints = async (): Promise<GetEndpointsReponse[]> => {
 
 export const getSpellEndpoints = async (): Promise<GetEndpointsReponse[]> => {
   return getEndpoints(SPELL_ENDPOINT);
+};
+
+export const getClassEndpoints = async (): Promise<GetEndpointsReponse[]> => {
+  return getEndpoints(CLASS_ENDPOINT);
 };
 
 const getEndpoints = async (
@@ -62,7 +67,6 @@ export const getSpell = async (endpointUrl: string): Promise<Spell> => {
   return fetch(API_BASE + endpointUrl)
     .then((response) => response.json())
     .then((jsonReponse): Spell => {
-      console.log(jsonReponse);
       return {
         name: jsonReponse.name,
         description: jsonReponse.desc,
@@ -83,6 +87,39 @@ export const getSpell = async (endpointUrl: string): Promise<Spell> => {
     })
     .catch((errorResponse) => {
       throw new Error(errorResponse);
+    });
+};
+
+export const getClass = async (
+  endpointUrl: String,
+): Promise<CharacterClass> => {
+  return fetch(API_BASE + endpointUrl)
+    .then((response) => response.json())
+    .then((jsonReponse) => {
+      return {
+        name: jsonReponse.name,
+        hitDice: jsonReponse.hit_die,
+        savingThrows: mapSavingThrows(jsonReponse.saving_throws),
+        spellCasting: jsonReponse.spellcasting,
+      };
+    });
+};
+
+const mapSavingThrows = (
+  savingThrows: GetEndpointsReponse[],
+): AbilityType[] => {
+  return savingThrows.map(
+    (save) => AbilityType[save.name as keyof typeof AbilityType],
+  );
+};
+
+export const getClassLevels = async (className: string): Promise<any> => {
+  return fetch(
+    API_BASE + CLASS_ENDPOINT + "/" + className.toLowerCase() + "/levels",
+  )
+    .then((response) => response.json())
+    .then((jsonReponse) => {
+      return jsonReponse;
     });
 };
 

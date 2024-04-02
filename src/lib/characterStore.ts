@@ -8,14 +8,24 @@ import {
 import { Race } from "./types/race";
 import Source from "./enums/source";
 import { Spell } from "./types/spell";
+import { CharacterClass } from "./types/characterClass";
 
 export const characterStore: Writable<Character> = writable({
   characterInfo: {},
   abilityScores: getDeafultAbilityScores(),
   abilityBonuses: [],
+  baseClass: undefined,
+  classes: [],
   features: [],
   spells: [],
 });
+
+export const setCharacterBaseClass = (characterClass: CharacterClass) => {
+  characterStore.update((store) => {
+    store.baseClass = characterClass;
+    return store;
+  });
+};
 
 export const addCharacterSpell = (spell: Spell) => {
   characterStore.update((store) => {

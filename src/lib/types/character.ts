@@ -8,6 +8,8 @@ export default interface Character {
   characterInfo: CharacterInfo;
   abilityScores: AbilityScore[];
   abilityBonuses: AbilityBonus[];
+  baseClass: any;
+  classes: any[];
   features: any[];
   spells: Spell[];
 }

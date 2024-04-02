@@ -6,10 +6,13 @@
   import SpellPicker from "./spells/SpellPicker.svelte";
   import { onMount } from "svelte";
   import { loadSpellEndpoints } from "$lib/stores/spellStore";
+  import { loadClassEndpoints } from "$lib/stores/classStore";
+  import ClassPicker from "./class-picker/ClassPicker.svelte";
 
   onMount(async () => {
     loadRaceEndpoints();
     loadSpellEndpoints();
+    loadClassEndpoints();
   });
 </script>
 
@@ -18,6 +21,10 @@
     <Step>
       <svelte:fragment slot="header">Character Info</svelte:fragment>
       <CharacterInfo />
+    </Step>
+    <Step>
+      <svelte:fragment slot="header">Class</svelte:fragment>
+      <ClassPicker />
     </Step>
     <Step>
       <svelte:fragment slot="header">Ability Scores</svelte:fragment>
