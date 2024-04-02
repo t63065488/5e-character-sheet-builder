@@ -18,7 +18,7 @@
   {#await classLevels}
     <ProgressRadial value={undefined} />
   {:then levels}
-    <p>{levels}</p>
+    <p>{JSON.stringify(levels)}</p>
   {:catch}
     <p>Error</p>
   {/await}

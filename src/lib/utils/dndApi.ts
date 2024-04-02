@@ -5,6 +5,8 @@ import Source from "$lib/enums/source";
 import { spellStore } from "$lib/stores/spellStore";
 import { Race } from "$lib/types/race";
 import { Spell } from "$lib/types/spell";
+import { CharacterClass } from "$lib/types/characterClass";
+import { json } from "stream/consumers";
 
 const API_BASE = "https://www.dnd5eapi.co";
 
@@ -27,7 +29,6 @@ export const getSpellEndpoints = async (): Promise<GetEndpointsReponse[]> => {
 };
 
 export const getClassEndpoints = async (): Promise<GetEndpointsReponse[]> => {
-  console.log("Called");
   return getEndpoints(CLASS_ENDPOINT);
 };
 
@@ -89,13 +90,27 @@ export const getSpell = async (endpointUrl: string): Promise<Spell> => {
     });
 };
 
-export const getClass = async (endpointUrl: String): Promise<any> => {
-  console.log(endpointUrl);
+export const getClass = async (
+  endpointUrl: String,
+): Promise<CharacterClass> => {
   return fetch(API_BASE + endpointUrl)
     .then((response) => response.json())
     .then((jsonReponse) => {
-      return jsonReponse;
+      return {
+        name: jsonReponse.name,
+        hitDice: jsonReponse.hit_die,
+        savingThrows: mapSavingThrows(jsonReponse.saving_throws),
+        spellCasting: jsonReponse.spellcasting,
+      };
     });
+};
+
+const mapSavingThrows = (
+  savingThrows: GetEndpointsReponse[],
+): AbilityType[] => {
+  return savingThrows.map(
+    (save) => AbilityType[save.name as keyof typeof AbilityType],
+  );
 };
 
 export const getClassLevels = async (className: string): Promise<any> => {

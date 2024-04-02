@@ -31,7 +31,6 @@ export const loadClass = (name: string, endpointUrl: string) => {
     if (!(name in store.classes)) {
       getClass(endpointUrl)
         .then((returnedClass) => {
-          console.log(returnedClass);
           store.classes[name] = returnedClass;
         })
         .catch((error) => {
@@ -47,7 +46,6 @@ export const loadClassLevels = (name: string) => {
   classStore.update((store) => {
     if (store.classes[name].classLevels == null) {
       getClassLevels(name).then((classLevels) => {
-        console.log(classLevels);
         store.classes[name].levels = classLevels;
       });
     }
