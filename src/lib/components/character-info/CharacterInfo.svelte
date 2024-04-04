@@ -6,7 +6,7 @@
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import RaceInfo from "./RaceInfo.svelte";
-  import { loadRace, raceStore } from "$lib/stores/raceStore";
+  import { getRace, getRaceEndpoints } from "$lib/utils/dndApi";
 </script>
 
 <div class="p-4">
@@ -33,27 +33,30 @@
   <hr />
   <div class="p-4" />
   <h2 class="step-header text-2xl font-bold">Available Races</h2>
-  {#if $raceStore.loaded}
+  {#await getRaceEndpoints()}
+    <ProgressRadial value={undefined} />
+    <p>Loading Races...</p>
+  {:then raceEndpoints}
     <Accordion>
-      {#each $raceStore.raceEndpoints as raceEndpoint}
-        <AccordionItem
-          on:click={() => loadRace(raceEndpoint.name, raceEndpoint.url)}
-        >
+      {#each raceEndpoints as raceEndpoint}
+        <AccordionItem>
           <svelte:fragment slot="summary">{raceEndpoint.name}</svelte:fragment>
           <svelte:fragment slot="content">
-            {#if $raceStore.races[raceEndpoint.name]}
-              <RaceInfo
-                race={$raceStore.races[raceEndpoint.name]}
-                selectEnabled={true}
-              />
-            {:else}
+            {#await getRace(raceEndpoint.url)}
               <ProgressRadial value={undefined} />
-            {/if}
+              <p>Loading {raceEndpoint.name}...</p>
+            {:then retrievedRace}
+              <RaceInfo race={retrievedRace} selectEnabled={true} />
+            {:catch error}
+              <p>
+                There was an error loading details for {raceEndpoint.name} - {error}
+              </p>
+            {/await}
           </svelte:fragment>
         </AccordionItem>
       {/each}
     </Accordion>
-  {:else}
-    <ProgressRadial value={undefined} />
-  {/if}
+  {:catch}
+    <p>There was an error loading available races...</p>
+  {/await}
 </div>
