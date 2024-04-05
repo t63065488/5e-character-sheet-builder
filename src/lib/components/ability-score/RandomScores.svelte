@@ -1,11 +1,8 @@
 <script lang="ts">
   import { updateCharacterAbilityScores } from "$lib/characterStore";
-  import {
-    AbilityScore,
-    getDeafultAbilityScores,
-  } from "$lib/types/abilityScore";
+  import { AbilityScore } from "$lib/types/abilityScore";
+  import { ArrowLeftOutline, ArrowRightOutline } from "flowbite-svelte-icons";
   import AbilityContainer from "./AbilityContainer.svelte";
-  import { ArrowLeftSolid, ArrowRightSolid } from "flowbite-svelte-icons";
 
   export let abilityScores: AbilityScore[];
 
@@ -73,7 +70,7 @@
             type="button"
             class="btn-icon variant-filled"
             on:click={() => swapScore(index, index - 1)}
-            ><ArrowLeftSolid /></button
+            ><ArrowLeftOutline /></button
           >
         {/if}
         <AbilityContainer abilityScore={block} />
@@ -88,7 +85,7 @@
             type="button"
             class="btn-icon variant-filled"
             on:click={() => swapScore(index, index + 1)}
-            ><ArrowRightSolid /></button
+            ><ArrowRightOutline /></button
           >
         {/if}
       </div>
