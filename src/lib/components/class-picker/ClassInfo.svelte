@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { loadClassLevels } from "$lib/stores/classStore";
   import { CharacterClass } from "$lib/types/characterClass";
   import { getClassLevels } from "$lib/utils/dndApi";
   import { ProgressRadial } from "@skeletonlabs/skeleton";
