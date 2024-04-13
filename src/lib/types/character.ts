@@ -9,7 +9,7 @@ export default interface Character {
   abilityScores: AbilityScore[];
   abilityBonuses: AbilityBonus[];
   baseClass: any;
-  classes: any[];
+  classes: { [name: string]: { level: number; class: any } };
   features: any[];
   spells: Spell[];
 }

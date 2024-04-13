@@ -15,7 +15,7 @@ export const characterStore: Writable<Character> = writable({
   abilityScores: getDeafultAbilityScores(),
   abilityBonuses: [],
   baseClass: undefined,
-  classes: [],
+  classes: {},
   features: [],
   spells: [],
 });
