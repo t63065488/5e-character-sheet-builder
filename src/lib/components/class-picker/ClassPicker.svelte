@@ -21,6 +21,11 @@
   };
 </script>
 
+<!-- 
+@component
+
+- Responsible for allowing a player to choose a base class and proceeding levels in either the same class or multiple classes.
+ -->
 <div>
   <div>
     {#await getClassEndpoints()}
