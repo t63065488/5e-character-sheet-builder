@@ -13,6 +13,10 @@
   });
 </script>
 
+<!-- 
+  @component
+  - Displays data after a provided class.
+ -->
 <div>
   {#await classLevels}
     <ProgressRadial value={undefined} />
