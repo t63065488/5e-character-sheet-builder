@@ -11,14 +11,21 @@
     getClass,
     getClassEndpoints,
   } from "$lib/utils/dndApi";
+  import { onMount } from "svelte";
 
   let selectedClass: GetEndpointsReponse;
+
+  let classEndpointsPromise: Promise<GetEndpointsReponse[]>;
 
   const updateCharacterBaseClass = (endpoint: GetEndpointsReponse) => {
     getClass(endpoint.url).then((returnedClass) => {
       setCharacterBaseClass(returnedClass);
     });
   };
+
+  onMount(() => {
+    classEndpointsPromise = getClassEndpoints();
+  });
 </script>
 
 <!-- 
@@ -28,7 +35,7 @@
  -->
 <div>
   <div>
-    {#await getClassEndpoints()}
+    {#await classEndpointsPromise}
       <ProgressRadial value={undefined} />
     {:then endpoints}
       <div>
@@ -46,7 +53,7 @@
       <div>
         <Accordion>
           {#each endpoints as endpoint}
-            <AccordionItem on:click={() => getClass(endpoint.url)}>
+            <AccordionItem>
               <svelte:fragment slot="summary">{endpoint.name}</svelte:fragment>
               <svelte:fragment slot="content">
                 {#await getClass(endpoint.url)}
