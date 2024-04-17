@@ -63,6 +63,23 @@
                   </div>
                 {:then characterClass}
                   <ClassInfo {characterClass} />
+                  <hr />
+                  <div class="flex">
+                    <button
+                      type="button"
+                      class="btn btn-sm variant-filled"
+                      on:click={() => console.log("Dong!")}
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm variant-filled"
+                      on:click={() => console.log("Ding!")}
+                    >
+                      +
+                    </button>
+                  </div>
                 {/await}
               </svelte:fragment>
             </AccordionItem>
