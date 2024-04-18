@@ -5,10 +5,17 @@
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import SpellInfo from "./SpellInfo.svelte";
-  import { getSpell, getSpellEndpoints } from "$lib/utils/dndApi";
+  import { GetEndpointsReponse, getSpell, getSpellEndpoints } from "$lib/utils/dndApi";
+    import { onMount } from "svelte";
+
+  let spellEndpoints: Promise<GetEndpointsReponse[]>;
+
+  onMount(() => {
+    spellEndpoints = getSpellEndpoints();
+  })
 </script>
 
-{#await getSpellEndpoints()}
+{#await spellEndpoints}
   <ProgressRadial value={undefined} />
   <p>Loading spells...</p>
 {:then spellEndpoints}
