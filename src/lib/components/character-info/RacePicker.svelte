@@ -1,18 +1,22 @@
 <script lang="ts">
-  import { GetEndpointsReponse, getRace, getRaceEndpoints } from "$lib/utils/dndApi";
+  import {
+    GetEndpointsReponse,
+    getRace,
+    getRaceEndpoints,
+  } from "$lib/utils/dndApi";
   import {
     Accordion,
     AccordionItem,
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import RaceInfo from "./RaceInfo.svelte";
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
   let raceEndpoints: Promise<GetEndpointsReponse[]>;
 
   onMount(() => {
     raceEndpoints = getRaceEndpoints();
-  })
+  });
 </script>
 
 {#await raceEndpoints}
