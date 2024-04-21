@@ -23,6 +23,14 @@
     });
   };
 
+  const addCharacterLevel = () => {
+    console.log("Ding!");
+  };
+
+  const removeCharacterLevel = () => {
+    console.log("Dong!");
+  };
+
   onMount(() => {
     classEndpointsPromise = getClassEndpoints();
   });
@@ -68,14 +76,14 @@
                     <button
                       type="button"
                       class="btn btn-sm variant-filled"
-                      on:click={() => console.log("Dong!")}
+                      on:click={addCharacterLevel}
                     >
                       -
                     </button>
                     <button
                       type="button"
                       class="btn btn-sm variant-filled"
-                      on:click={() => console.log("Ding!")}
+                      on:click={removeCharacterLevel}
                     >
                       +
                     </button>
