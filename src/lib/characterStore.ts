@@ -100,3 +100,7 @@ export const updateCharacterRace = (newRace: Race) => {
     return currentCharacter;
   });
 };
+
+export const addCharacterLevel = () => {
+  
+}
