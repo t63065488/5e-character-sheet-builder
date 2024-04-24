@@ -103,7 +103,7 @@ export const updateCharacterRace = (newRace: Race) => {
 
 export const addCharacterLevel = (characterLevel: any) => {
   characterStore.update((store) => {
-    store.classes[characterLevel.name] = {class: characterLevel, level: 1}
+    store.classes[characterLevel.name] = { class: characterLevel, level: 1 };
     return store;
-  })
-}
+  });
+};
