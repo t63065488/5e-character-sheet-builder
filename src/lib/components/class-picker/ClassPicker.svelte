@@ -5,7 +5,7 @@
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import ClassInfo from "./ClassInfo.svelte";
-  import { setCharacterBaseClass } from "$lib/characterStore";
+  import { increaseCharacterLevel, setCharacterBaseClass } from "$lib/characterStore";
   import {
     GetEndpointsReponse,
     getClass,
@@ -24,7 +24,7 @@
   };
 
   const addCharacterLevel = () => {
-    console.log("Ding!");
+    increaseCharacterLevel(null);
   };
 
   const removeCharacterLevel = () => {
