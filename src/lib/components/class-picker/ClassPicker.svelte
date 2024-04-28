@@ -5,7 +5,10 @@
     ProgressRadial,
   } from "@skeletonlabs/skeleton";
   import ClassInfo from "./ClassInfo.svelte";
-  import { increaseCharacterLevel, setCharacterBaseClass } from "$lib/characterStore";
+  import {
+    increaseCharacterLevel,
+    setCharacterBaseClass,
+  } from "$lib/characterStore";
   import {
     GetEndpointsReponse,
     getClass,
