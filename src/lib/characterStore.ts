@@ -101,6 +101,9 @@ export const updateCharacterRace = (newRace: Race) => {
   });
 };
 
+/**
+ * Appends a character level and associated features to the character store.
+ */
 export const increaseCharacterLevel = (characterLevel: any) => {
   characterStore.update((store) => {
     store.classes[characterLevel.name] = { class: characterLevel, level: 1 };
