@@ -103,10 +103,21 @@ export const updateCharacterRace = (newRace: Race) => {
 
 /**
  * Appends a character level and associated features to the character store.
+ * @param characterLevel the level to increase - this arg contains all related features of the level.
  */
 export const increaseCharacterLevel = (characterLevel: any) => {
   characterStore.update((store) => {
     store.classes[characterLevel.name] = { class: characterLevel, level: 1 };
+    return store;
+  });
+};
+
+/**
+ * Performs a lookup of the associated class' key and reduce a level, removing associated features.
+ * @param className Class key to reduce level of
+ */
+export const decreaseCharacterLevel = (className: string) => {
+  characterStore.update((store) => {
     return store;
   });
 };
