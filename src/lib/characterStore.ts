@@ -118,6 +118,10 @@ export const increaseCharacterLevel = (characterLevel: any) => {
  */
 export const decreaseCharacterLevel = (className: string) => {
   characterStore.update((store) => {
+    if (className in store.classes) {
+      store.classes[className].level = store.classes[className].level - 1;
+      if (store.classes[className].level === 0) delete store.classes[className];
+    }
     return store;
   });
 };
