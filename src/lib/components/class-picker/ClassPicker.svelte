@@ -6,6 +6,7 @@
   } from "@skeletonlabs/skeleton";
   import ClassInfo from "./ClassInfo.svelte";
   import {
+    decreaseCharacterLevel,
     increaseCharacterLevel,
     setCharacterBaseClass,
   } from "$lib/characterStore";
@@ -30,8 +31,8 @@
     increaseCharacterLevel(null);
   };
 
-  const removeCharacterLevel = () => {
-    console.log("Dong!");
+  const removeCharacterLevel = (className: string) => {
+    decreaseCharacterLevel(className);
   };
 
   onMount(() => {
