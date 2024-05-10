@@ -27,8 +27,8 @@
     });
   };
 
-  const addCharacterLevel = () => {
-    increaseCharacterLevel(null);
+  const addCharacterLevel = (characterClass: any) => {
+    increaseCharacterLevel(characterClass);
   };
 
   const removeCharacterLevel = (className: string) => {
@@ -80,7 +80,7 @@
                     <button
                       type="button"
                       class="btn btn-sm variant-filled"
-                      on:click={addCharacterLevel}
+                      on:click={() => addCharacterLevel(characterClass)}
                     >
                       -
                     </button>
