@@ -1,0 +1,17 @@
+name: npm-run-test
+run-name: ${{ github.actor }}-${{ github.sha }}-npm-run-test
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  npm-run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "latest"
+      - run: npm ci
+      - run: npm test
