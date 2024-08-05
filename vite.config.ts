@@ -1,10 +1,11 @@
 import { defineConfig, configDefaults } from "vitest/config";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { svelteTesting } from "@testing-library/svelte/vite";
 import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [svelte(), svelteTesting()],
   resolve: {
     alias: [
       {
@@ -20,10 +21,12 @@ export default defineConfig({
   test: {
     globals: true,
     watch: false,
+    environment: "jsdom",
     coverage: {
       provider: "v8",
-      exclude: ["*.{d,config}.{js,ts}"],
+      exclude: ["**/*.{d,config}.{js,ts}", "dist/*", "./src/main.ts"],
     },
     exclude: [...configDefaults.exclude],
+    setupFiles: ["vitest-setup.ts"],
   },
 });

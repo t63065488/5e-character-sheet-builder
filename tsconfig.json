@@ -19,7 +19,8 @@
       "@lib/*": ["./src/lib/*"],
       "@assets/*": ["./src/assets"]
     },
-    "strict": true
+    "strict": true,
+    "types": ["vitest/globals", "@testing-library/jest-dom/vitest"]
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
   "references": [{ "path": "./tsconfig.node.json" }]
