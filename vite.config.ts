@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, configDefaults } from "vitest/config";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import path from "path";
 
@@ -22,6 +22,8 @@ export default defineConfig({
     watch: false,
     coverage: {
       provider: "v8",
+      exclude: ["*.{d,config}.{js,ts}"],
     },
+    exclude: [...configDefaults.exclude],
   },
 });
